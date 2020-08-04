@@ -1,0 +1,142 @@
+{
+  "name": "tints-and-shades",
+  "version": "0.1.0",
+  "author": "Ice Lam <6780420+icelam@users.noreply.github.com>",
+  "homepage": "./",
+  "description": "Tints and Shades - Built with Electron and LitElement.",
+  "private": true,
+  "main": "dist/main.js",
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.4.4",
+    "lit-element": "^2.3.1",
+    "lit-html": "^1.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@types/node": "12",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "babel-plugin-transform-remove-debugger": "^6.9.4",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.2.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^4.2.0",
+    "cssnano": "^4.1.10",
+    "electron": "^9.1.2",
+    "electron-builder": "^22.8.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.22.0",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "3.1.0",
+    "lint-staged": "^10.2.11",
+    "lit-analyzer": "^1.2.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^9.0.2",
+    "standard-version": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "svg-inline-loader": "^0.8.2",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "url-loader": "^4.1.0",
+    "web-component-analyzer": "^1.1.6",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.0.9"
+  },
+  "scripts": {
+    "start": "concurrently \"yarn start:web\" \"yarn start:electron\"",
+    "build": "yarn build:electron && yarn build:web",
+    "start:electron": "yarn build:electron && ELECTRON_ENV=development ELECTRON_START_URL=http://localhost:8888 electron .",
+    "build:electron": "rimraf ./dist/main.js && tsc ./src/main.ts --outDir ./dist",
+    "start:web": "webpack-dev-server --config webpack/webpack.dev.conf.js",
+    "build:web": "webpack --config webpack/webpack.prod.conf.js  --colors",
+    "lint": "eslint --ext .js,.ts src",
+    "lint:lit-analyzer": "lit-analyzer",
+    "package:mac": "yarn clean:package && yarn build && electron-builder build --mac",
+    "package:linux": "yarn clean:package && yarn build && electron-builder build --linux",
+    "package:windows": "yarn clean:package && yarn build && electron-builder build --win --x64 --ia32",
+    "package": "yarn clean:package && yarn build && electron-builder build -mwl --x64 --ia32",
+    "clean:package": "rimraf ./build-packages",
+    "analyze:web": "wca analyze \"src/**/*.ts\" --outFile wca-report.json",
+    "first-release": "standard-version --commit-all --tag-prefix v --first-release --infile CHANGELOG.md",
+    "release": "standard-version --commit-all --tag-prefix v --infile CHANGELOG.md"
+  },
+  "build": {
+    "productName": "Tints and Shades",
+    "appId": "io.github.icelam.tintsandshades",
+    "extends": null,
+    "files": [
+      "dist/**/*",
+      "src/main.ts",
+      "package.json"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "build-packages"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 9",
+      "not op_mini all",
+      "ie 10",
+      "ie 11"
+    ],
+    "development": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 9",
+      "not op_mini all",
+      "ie 10",
+      "ie 11"
+    ]
+  }
+}

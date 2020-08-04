@@ -1,0 +1,19 @@
+@import './colors';
+@import './variables';
+
+/* For hiding scrollbar in MacOS when a mouse is plugged */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Arial', sans-serif;
+  -webkit-text-size-adjust: 100%;
+}

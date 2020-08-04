@@ -1,0 +1,45 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb-base",
+  ],
+  "settings": {
+    "import/resolver": [
+      "node",
+      {
+        "alias": {
+          "map": [
+            ["@components", "./src/renderer/components"],
+            ["@fonts", "./src/renderer/assets/fonts"],
+            ["@images", "./src/renderer/assets/images"],
+            ["@styles", "./src/renderer/assets/scss"],
+            ["@utils", "./src/renderer/utils"]
+          ],
+          "extensions": [".js", ".ts"]
+        }
+      }
+    ]
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "no-plusplus": ["off"],
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+      }
+    ],
+    "class-methods-use-this": ["off"],
+    "indent": ["error", 2, {
+      "ignoredNodes": ["TemplateLiteral *"],
+      "SwitchCase": 1
+    }]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": "3.0.0"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true } ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true } ],
+        ["transform-remove-console", { "exclude": [ "error" ] }],
+        "transform-remove-debugger"
+      ]
+    }
+  }
+}
