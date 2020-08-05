@@ -1,0 +1,23 @@
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-light-red: #ff5f57;
+  --color-dark-red: #83251e;
+  --color-yellow: #febc2e;
+  --color-dark-yellow: #90591d;
+  --color-grey-96: #f4f4f4;
+  --color-grey-93: #eeeeee;
+  --color-grey-91: #e7e7e7;
+  --color-grey-67: #aaaaaa;
+  --color-grey-54: #8a8a8a;
+  --color-grey-40: #666666;
+
+  --color-frame-control-close: var(--color-light-red);
+  --color-frame-control-close-text: var(--color-dark-red);
+  --color-frame-control-minimize: var(--color-yellow);
+  --color-frame-control-minimize-text: var(--color-dark-yellow);
+  --color-frame-header-background: var(--color-grey-93);
+  --color-frame-header-text: var(--color-grey-54);
+  --color-frame-header-icon: var(--color-grey-54);
+  --color-frame-header-icon-hover: var(--color-grey-40);
+}

@@ -26,7 +26,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [path.join(__dirname, '../dist/**/*'), `!${path.join(__dirname, '../dist/main.js')}`]
+      cleanOnceBeforeBuildPatterns: [
+        path.join(__dirname, '../dist/**/*'),
+        `!${path.join(__dirname, '../dist/main.js')}`,
+        `!${path.join(__dirname, '../dist/utils')}`
+      ]
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/renderer/index.html'),
