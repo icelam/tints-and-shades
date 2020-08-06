@@ -1,9 +1,17 @@
-/* eslint "import/no-extraneous-dependencies": ["error", {"optionalDependencies": false} ] */
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+const alias = {
+  '@components': path.resolve(__dirname, '../src/renderer/components'),
+  '@fonts': path.resolve(__dirname, '../src/renderer/assets/fonts'),
+  '@images': path.resolve(__dirname, '../src/renderer/assets/images'),
+  '@styles': path.resolve(__dirname, '../src/renderer/assets/scss'),
+  '@utils': path.resolve(__dirname, '../src/utils'),
+  '@translations': path.resolve(__dirname, '../src/translations')
+};
+
+const rendererWebpack = {
   target: 'electron-renderer',
   entry: {
     app: [path.resolve(__dirname, '../src/renderer/index.ts')]
@@ -14,22 +22,20 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          enforce: true
+        webcomponets: {
+          test: /\/node_modules\/@webcomponents\//,
+          name: 'webcomponents'
         }
       }
-    }
+    },
+    concatenateModules: true
   },
   plugins: [
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
-        path.join(__dirname, '../dist/**/*'),
-        `!${path.join(__dirname, '../dist/main.js')}`,
-        `!${path.join(__dirname, '../dist/utils')}`
+        path.join(__dirname, '../dist/**/*')
       ]
     }),
     new HtmlWebpackPlugin({
@@ -39,17 +45,11 @@ module.exports = {
         collapseWhitespace: true,
         removeAttributeQuotes: true
       }
-    }),
+    })
   ],
   resolve: {
     extensions: ['*', '.js', '.ts', '.json', '.scss', '.svg'],
-    alias: {
-      '@components': path.resolve(__dirname, '../src/renderer/components'),
-      '@fonts': path.resolve(__dirname, '../src/renderer/assets/fonts'),
-      '@images': path.resolve(__dirname, '../src/renderer/assets/images'),
-      '@styles': path.resolve(__dirname, '../src/renderer/assets/scss'),
-      '@utils': path.resolve(__dirname, '../src/renderer/utils')
-    }
+    alias
   },
   module: {
     rules: [
@@ -57,7 +57,8 @@ module.exports = {
         test: /\.(html|htm)(\?.*)?$/,
         loader: 'html-loader'
       },
-      { test: /\.svg$/,
+      {
+        test: /\.svg$/,
         loader: 'svg-inline-loader',
         exclude: [
           path.resolve(__dirname, '../src/renderer/assets/fonts')
@@ -89,3 +90,50 @@ module.exports = {
     ]
   }
 };
+
+const mainWebpack = {
+  target: 'electron-main',
+  entry: {
+    main: [path.resolve(__dirname, '../src/main.ts')]
+  },
+  output: {
+    path: path.join(__dirname, '../dist'),
+    filename: '[name].js'
+  },
+  resolve: {
+    extensions: ['*', '.js', '.ts'],
+    alias
+  },
+  node: {
+    __filename: false,
+    __dirname: false
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts?$/,
+        exclude: (file) => {
+          const rendererSrc = new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
+          const nodeModulesFolder = /node_modules\//.test(file);
+          return rendererSrc || nodeModulesFolder;
+        },
+        loader: 'babel-loader!ts-loader'
+      },
+      {
+        test: /\.(js)$/,
+        exclude: (file) => {
+          const rendererSrc = new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
+          const nodeModulesFolder = /node_modules\//.test(file);
+          return rendererSrc || nodeModulesFolder;
+        },
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
+  }
+};
+
+module.exports = [rendererWebpack, mainWebpack];

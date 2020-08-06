@@ -7,6 +7,9 @@
     "@typescript-eslint"
   ],
   "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "airbnb-base",
   ],
   "settings": {
@@ -19,7 +22,8 @@
             ["@fonts", "./src/renderer/assets/fonts"],
             ["@images", "./src/renderer/assets/images"],
             ["@styles", "./src/renderer/assets/scss"],
-            ["@utils", "./src/renderer/utils"]
+            ["@utils", "./src/utils"],
+            ["@translations", "./src/translations"]
           ],
           "extensions": [".js", ".ts"]
         }
@@ -27,8 +31,6 @@
     ]
   },
   "rules": {
-    "comma-dangle": ["error", "never"],
-    "no-plusplus": ["off"],
     "import/extensions": [
       "error",
       {
@@ -36,10 +38,50 @@
         "ts": "never",
       }
     ],
+    "comma-dangle": ["error", "never"],
+    "no-plusplus": ["off"],
+    "no-multiple-empty-lines": ["error", {
+      "max": 1,
+      "maxEOF": 1,
+      "maxBOF": 1
+    }],
     "class-methods-use-this": ["off"],
     "indent": ["error", 2, {
       "ignoredNodes": ["TemplateLiteral *"],
       "SwitchCase": 1
+    }],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true,
+      "optionalDependencies": false,
+      "peerDependencies": false
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["webpack/**/*.js"],
+      "parser": "espree",
+      "parserOptions": {},
+      "extends": [
+        "airbnb-base",
+      ],
+      "settings": {
+        "import/resolver": [
+          "node"
+        ]
+      },
+      "rules": {
+        "no-console": ["off"],
+        "comma-dangle": ["error", "never"],
+        "no-multiple-empty-lines": ["error", {
+          "max": 1,
+          "maxEOF": 1,
+          "maxBOF": 1
+        }],
+        "import/no-extraneous-dependencies": ["error", {
+          "devDependencies": true, "optionalDependencies": false, "peerDependencies": false
+        }],
+        "@typescript-eslint/no-var-requires": ["off"]
+      }
+    }
+  ]
 }

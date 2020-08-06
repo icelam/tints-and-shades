@@ -1,13 +1,12 @@
-/* eslint "import/no-extraneous-dependencies": ["error", {"optionalDependencies": false} ] */
 const path = require('path');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const WebpackElectronReloadPlugin = require('./plugins/webpack-electron-reload-plugin.js');
 
 const baseWebpackConfig = require('./webpack.base.conf');
 
-module.exports = merge(baseWebpackConfig, {
+const rendererWebpack = merge(baseWebpackConfig[0], {
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
@@ -22,7 +21,14 @@ module.exports = merge(baseWebpackConfig, {
       warnings: false,
       errors: true
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    clientLogLevel: 'trace',
+    // Webpack dev server seems to only accept the first devSever config in mulit-compiler mode
+    // Allowing main.js to write to disk so that electron can start
+    writeToDisk: (filePath) => {
+      const filesToEmit = [/main\.js$/];
+      return filesToEmit.some((file) => file.test(filePath));
+    }
   },
   plugins: [
     new Webpack.DefinePlugin({
@@ -39,9 +45,9 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.(js)$/,
         exclude: (file) => {
-          const notSrc = !new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
+          const notRendererSrc = !new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
           const notLitElement = !/node_modules\/(lit-element|lit-html|@webcomponents)\//.test(file);
-          return notSrc && notLitElement;
+          return notRendererSrc && notLitElement;
         },
         use: [
           {
@@ -69,3 +75,18 @@ module.exports = merge(baseWebpackConfig, {
     ]
   }
 });
+
+const mainWebpack = merge(baseWebpackConfig[1], {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new WebpackElectronReloadPlugin({
+      startCommand: 'yarn start:electron'
+    })
+  ]
+});
+
+module.exports = [rendererWebpack, mainWebpack];

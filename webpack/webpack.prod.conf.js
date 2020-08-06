@@ -1,4 +1,3 @@
-/* eslint "import/no-extraneous-dependencies": ["error", {"optionalDependencies": false} ] */
 const path = require('path');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
@@ -10,7 +9,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const baseWebpackConfig = require('./webpack.base.conf');
 
-module.exports = merge(baseWebpackConfig, {
+const rendererWebpack = merge(baseWebpackConfig[0], {
   mode: 'production',
   stats: 'errors-only',
   bail: true,
@@ -19,22 +18,10 @@ module.exports = merge(baseWebpackConfig, {
     chunkFilename: 'assets/js/[name].[chunkhash:8].chunk.js',
     publicPath: './'
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        webcomponets: {
-          test: /\/node_modules\/@webcomponents\//,
-          name: "webcomponents"
-        }
-      }
-    }
-  },
   plugins: [
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new Webpack.optimize.ModuleConcatenationPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -73,9 +60,9 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.(js)$/,
         exclude: (file) => {
-          const notSrc = !new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
+          const notRendererSrc = !new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
           const notLitElement = !/node_modules\/(lit-element|lit-html|@webcomponents)\//.test(file);
-          return notSrc && notLitElement;
+          return notRendererSrc && notLitElement;
         },
         use: [
           {
@@ -124,3 +111,17 @@ module.exports = merge(baseWebpackConfig, {
     ]
   }
 });
+
+const mainWebpack = merge(baseWebpackConfig[1], {
+  mode: 'production',
+  stats: 'errors-only',
+  bail: true,
+  plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new Webpack.optimize.ModuleConcatenationPlugin()
+  ]
+});
+
+module.exports = [rendererWebpack, mainWebpack];

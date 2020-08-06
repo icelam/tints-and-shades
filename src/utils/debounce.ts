@@ -1,12 +1,11 @@
-/* eslint-disable func-names, prefer-rest-params */
-const debounce = (func: Function, delay: number) => {
+/* eslint-disable func-names, prefer-rest-params, @typescript-eslint/ban-types */
+const debounce = <T extends Function>(functionToDebounce: T, delay: number): () => void => {
   let debounceTimer: ReturnType<typeof setTimeout>;
   return function () {
-    // @ts-ignore
-    const context = this;
-    const args = arguments;
+    const context = this; // eslint-disable-line @typescript-eslint/no-this-alias
+    const functionArguments = arguments;
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    debounceTimer = setTimeout(() => functionToDebounce.apply(context, functionArguments), delay);
   };
 };
 

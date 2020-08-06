@@ -3,7 +3,7 @@ import * as url from 'url';
 import {
   app, BrowserWindow, Menu, ipcMain
 } from 'electron';
-import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from './utils';
+import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;

@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 import {
-  LitElement, html, property, customElement, css, svg
+  LitElement, html, property, customElement, css, svg, TemplateResult, CSSResult
 } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { classMap } from 'lit-html/directives/class-map';
@@ -13,7 +13,7 @@ import commonButtonStyles from '@components/Button/button.styles';
  */
 @customElement('frame-header')
 class FrameHeader extends LitElement {
-  static get styles() {
+  static get styles(): CSSResult[] {
     return [
       commonButtonStyles,
       css`
@@ -91,7 +91,7 @@ class FrameHeader extends LitElement {
   @property({ type: Boolean })
   shouldPinFrame = false;
 
-  render() {
+  render(): TemplateResult {
     return html`
       <div class="header-group">
         <button

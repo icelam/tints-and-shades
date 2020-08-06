@@ -8,6 +8,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -18,7 +20,18 @@
         "name": "ts-lit-plugin",
         "strict": true
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/renderer/components/*"],
+      "@fonts/*": ["src/renderer/assets/fonts/*"],
+      "@images/*": ["src/renderer/assets/images/*"],
+      "@styles/*": ["src/renderer/assets/scss/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@utils/*": ["src/utils/*"],
+      "@translations": ["src/translations/index.ts"],
+      "@translations/*": ["src/translations/*"],
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": []
