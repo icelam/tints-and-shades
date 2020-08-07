@@ -60,7 +60,7 @@
   },
   "overrides": [
     {
-      "files": ["webpack/**/*.js"],
+      "files": ["webpack/**/*.js", "scripts/**/*.js"],
       "parser": "espree",
       "parserOptions": {},
       "extends": [

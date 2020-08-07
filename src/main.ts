@@ -5,7 +5,7 @@ import {
 } from 'electron';
 import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
 import { applicationMenu, settingMenu } from '@menus';
-import { IS_DEVELOPEMENT, IS_LINUX } from '@constants';
+import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;
@@ -32,7 +32,7 @@ const createWindow = async () => {
     },
     // For app icon to be displayed correctly on linux AppImage
     // https://github.com/electron-userland/electron-builder/issues/2269
-    icon: IS_LINUX ? path.join(__dirname, './icon.png') : undefined
+    icon: IS_LINUX ? APP_ICON_PATH : undefined
   });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -91,3 +91,7 @@ ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: { x: number, y: number }) => 
     y: mousePosition.y
   });
 });
+
+// Export mainWindow for other file which requies BrowserWindow to work
+const getMainWindow = (): BrowserWindow => mainWindow;
+export default getMainWindow;
