@@ -65,7 +65,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.conf.js",
-    "start:electron": "ELECTRON_ENV=development ELECTRON_START_URL=http://localhost:8888 electron .",
+    "start:electron": "ELECTRON_START_URL=http://localhost:8888 electron .",
     "build": "webpack --config webpack/webpack.prod.conf.js  --colors",
     "lint": "eslint --ext .js,.ts src",
     "lint:lit-analyzer": "lit-analyzer",
