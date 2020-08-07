@@ -4,12 +4,13 @@ import {
   app, BrowserWindow, Menu, ipcMain
 } from 'electron';
 import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
+import { applicationMenu, settingMenu } from '@menus';
+import { IS_DEVELOPEMENT } from '@constants';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;
-const IS_DEVELOPEMENT = process.env.ELECTRON_ENV === 'development';
 
-let mainWindow: BrowserWindow | null = null;
+let mainWindow: BrowserWindow;
 
 const createWindow = async () => {
   const WINDOW_POSITION = await getStoredWindowLocation();
@@ -68,18 +69,22 @@ app.on('activate', () => {
   }
 });
 
-// Hide all menu bar items on macOS
-// Note: Hiding all menu items seems to diable opening DevTools with shortcuts on macOS
-// TODO: Put some useful item in menu and touch bar
-if (!IS_DEVELOPEMENT) {
-  Menu.setApplicationMenu(null);
-}
+// Application menu bar
+Menu.setApplicationMenu(applicationMenu);
 
-// Handle event send from ipcRenderer
+// Event Handlers
 ipcMain.on('QUIT_APP', () => mainWindow?.close());
 
 ipcMain.on('MINIMIZE_APP', () => mainWindow?.minimize());
 
 ipcMain.on('PIN_APP', (_, value: boolean) => {
   mainWindow?.setAlwaysOnTop(value);
+});
+
+ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: { x: number, y: number }) => {
+  settingMenu.popup({
+    window: mainWindow,
+    x: mousePosition.x,
+    y: mousePosition.y
+  });
 });

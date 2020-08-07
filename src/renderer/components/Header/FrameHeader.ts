@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron';
 import {
   LitElement, html, property, customElement, css, svg, TemplateResult, CSSResult
 } from 'lit-element';
@@ -85,11 +84,15 @@ class FrameHeader extends LitElement {
     ];
   }
 
-  /**
-   * Whether the current frame set to always on top or not.
-   */
-  @property({ type: Boolean })
-  shouldPinFrame = false;
+  @property({ type: Boolean }) shouldPinFrame = false;
+
+  @property() closeFrame?: () => void;
+
+  @property() minimizeFrame?: () => void;
+
+  @property() pinFrame?: () => void;
+
+  @property() openSettingMenu?: (event: MouseEvent) => void;
 
   render(): TemplateResult {
     return html`
@@ -109,7 +112,7 @@ class FrameHeader extends LitElement {
           <span>&minus;</span>
         </button>
       </div>
-      <div type="button" class="header-group">
+      <div class="header-group">
         <button
           type="button"
           class=${classMap(
@@ -124,25 +127,15 @@ class FrameHeader extends LitElement {
         >
           ${svg`${unsafeHTML(pinIcon)}`}
         </button>
-        <button type="button" class="button icon-button">
+        <button
+          type="button"
+          class="button icon-button"
+          @click=${this.openSettingMenu}
+        >
           ${svg`${unsafeHTML(settingIcon)}`}
         </button>
       </div>
     `;
-  }
-
-  private closeFrame() {
-    ipcRenderer.send('QUIT_APP');
-  }
-
-  private minimizeFrame() {
-    ipcRenderer.send('MINIMIZE_APP');
-  }
-
-  private pinFrame() {
-    const newPinState = !this.shouldPinFrame;
-    this.shouldPinFrame = newPinState;
-    ipcRenderer.send('PIN_APP', newPinState);
   }
 }
 

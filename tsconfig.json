@@ -27,10 +27,13 @@
       "@fonts/*": ["src/renderer/assets/fonts/*"],
       "@images/*": ["src/renderer/assets/images/*"],
       "@styles/*": ["src/renderer/assets/scss/*"],
-      "@utils": ["src/utils/index.ts"],
-      "@utils/*": ["src/utils/*"],
+      "@constants": ["./src/constants.ts"],
+      "@menus": ["./src/menus/index.ts"],
+      "@menus/*": ["./src/menus/*"],
       "@translations": ["src/translations/index.ts"],
       "@translations/*": ["src/translations/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src/**/*.ts"],

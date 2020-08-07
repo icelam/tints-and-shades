@@ -7,8 +7,10 @@ const alias = {
   '@fonts': path.resolve(__dirname, '../src/renderer/assets/fonts'),
   '@images': path.resolve(__dirname, '../src/renderer/assets/images'),
   '@styles': path.resolve(__dirname, '../src/renderer/assets/scss'),
-  '@utils': path.resolve(__dirname, '../src/utils'),
-  '@translations': path.resolve(__dirname, '../src/translations')
+  '@constants': path.resolve(__dirname, '../src/constants.ts'),
+  '@menus': path.resolve(__dirname, '../src/menus'),
+  '@translations': path.resolve(__dirname, '../src/translations'),
+  '@utils': path.resolve(__dirname, '../src/utils')
 };
 
 const rendererWebpack = {
