@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -110,6 +111,16 @@ const mainWebpack = {
     __filename: false,
     __dirname: false
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../resources/icons/512x512.png'),
+          to: './icon.png'
+        }
+      ]
+    })
+  ],
   module: {
     rules: [
       {

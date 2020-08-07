@@ -5,7 +5,7 @@ import {
 } from 'electron';
 import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
 import { applicationMenu, settingMenu } from '@menus';
-import { IS_DEVELOPEMENT } from '@constants';
+import { IS_DEVELOPEMENT, IS_LINUX } from '@constants';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;
@@ -29,7 +29,10 @@ const createWindow = async () => {
     webPreferences: {
       nodeIntegration: true,
       devTools: IS_DEVELOPEMENT
-    }
+    },
+    // For app icon to be displayed correctly on linux AppImage
+    // https://github.com/electron-userland/electron-builder/issues/2269
+    icon: IS_LINUX ? path.join(__dirname, './icon.png') : undefined
   });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({

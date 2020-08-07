@@ -26,7 +26,7 @@ const rendererWebpack = merge(baseWebpackConfig[0], {
     // Webpack dev server seems to only accept the first devSever config in mulit-compiler mode
     // Allowing main.js to write to disk so that electron can start
     writeToDisk: (filePath) => {
-      const filesToEmit = [/main\.js$/];
+      const filesToEmit = [/main\.js$/, /icon\.png$/];
       return filesToEmit.some((file) => file.test(filePath));
     }
   },
