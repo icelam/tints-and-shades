@@ -44,7 +44,6 @@ const rendererWebpack = merge(baseWebpackConfig[0], {
     rules: [
       {
         test: /\.tsx?$/,
-        include: path.resolve(__dirname, '../src/renderer'),
         use: [
           {
             loader: 'babel-loader',
@@ -60,9 +59,8 @@ const rendererWebpack = merge(baseWebpackConfig[0], {
       {
         test: /\.(js)$/,
         exclude: (file) => {
-          const notRendererSrc = !new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
           const notLitElement = !/node_modules\/(lit-element|lit-html|@webcomponents)\//.test(file);
-          return notRendererSrc && notLitElement;
+          return notLitElement;
         },
         use: [
           {

@@ -126,20 +126,12 @@ const mainWebpack = {
     rules: [
       {
         test: /\.ts?$/,
-        exclude: (file) => {
-          const rendererSrc = new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
-          const nodeModulesFolder = /node_modules\//.test(file);
-          return rendererSrc || nodeModulesFolder;
-        },
+        exclude: (file) => /node_modules\//.test(file),
         loader: 'babel-loader!ts-loader'
       },
       {
         test: /\.(js)$/,
-        exclude: (file) => {
-          const rendererSrc = new RegExp(path.resolve(__dirname, '../src/renderer')).test(file);
-          const nodeModulesFolder = /node_modules\//.test(file);
-          return rendererSrc || nodeModulesFolder;
-        },
+        exclude: (file) => /node_modules\//.test(file),
         use: [
           {
             loader: 'babel-loader'
