@@ -3,7 +3,8 @@ import {
   MenuItemConstructorOptions,
   dialog,
   MessageBoxOptions,
-  nativeImage
+  nativeImage,
+  Notification
 } from 'electron';
 import translations from '@translations';
 import {
@@ -14,23 +15,24 @@ import {
   V8_VERSION,
   APP_ICON_PATH
 } from '@constants';
+import { clearStorage } from '@utils';
 
 export const copyFormatMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.copyFormat,
+  label: translations.menus.copyFormat,
   submenu: [
     {
-      label: translations.menuItems.copyAsHex,
+      label: translations.menus.copyAsHex,
       type: 'radio',
       checked: true
       // TODO: Set copy as HEX, share value between setting menu and app menu
     },
     {
-      label: translations.menuItems.copyAsRgb,
+      label: translations.menus.copyAsRgb,
       type: 'radio'
       // TODO: Set copy as RGB, share value between setting menu and app menu
     },
     {
-      label: translations.menuItems.copyAccordingToInputMode,
+      label: translations.menus.copyAccordingToInputMode,
       type: 'radio'
       // TODO: Set copy according to input mode, share value between setting menu and app menu
     }
@@ -38,16 +40,16 @@ export const copyFormatMenuItem: MenuItemConstructorOptions = {
 };
 
 export const themeMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.theme,
+  label: translations.menus.theme,
   submenu: [
     {
-      label: translations.menuItems.lightTheme,
+      label: translations.menus.lightTheme,
       type: 'radio',
       checked: true
       // TODO: Set Light theme, share value between setting menu and app menu
     },
     {
-      label: translations.menuItems.darkTheme,
+      label: translations.menus.darkTheme,
       type: 'radio'
       // TODO: Set Dark theme, share value between setting menu and app menu
     }
@@ -55,7 +57,7 @@ export const themeMenuItem: MenuItemConstructorOptions = {
 };
 
 export const aboutMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.about,
+  label: translations.menus.about,
   accelerator: 'CmdOrCtrl+I',
   click: (): void => {
     const options: MessageBoxOptions = {
@@ -65,7 +67,7 @@ export const aboutMenuItem: MenuItemConstructorOptions = {
       defaultId: 1,
       cancelId: 1,
       noLink: true,
-      title: translations.menuItems.about,
+      title: translations.menus.about,
       message: `${translations.app.name} (v${APP_VERSION})`,
       detail: `${translations.app.description}\n
 Electron version: ${ELECTRON_VERSION}
@@ -83,28 +85,44 @@ V8 version: ${V8_VERSION}\n`
 };
 
 export const checkUpdatesMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.checkUpdates,
+  label: translations.menus.checkUpdates,
   accelerator: 'CmdOrCtrl+U'
   // TODO: Check for updates using latest release API from github
 };
 
 export const reportIssueMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.reportIssue,
+  label: translations.menus.reportIssue,
   click: async (): Promise<void> => {
     await shell.openExternal(translations.app.issueUrl);
   }
 };
 
 export const quitMenuItem: MenuItemConstructorOptions = {
-  label: translations.menuItems.quitApplication,
+  label: translations.menus.quitApplication,
   role: 'quit'
 };
 
 export const developerMenuItem: MenuItemConstructorOptions = {
-  label: 'Developer',
+  label: translations.menus.developer,
   submenu: [
-    { role: 'toggleDevTools' },
-    { role: 'reload' }
+    { label: translations.menus.toggleDevTools, role: 'toggleDevTools' },
+    { label: translations.menus.reload, role: 'reload' },
+    {
+      label: translations.menus.clearStorage,
+      accelerator: 'CmdOrCtrl+Shift+C',
+      click: async (): Promise<void> => {
+        const isStorageCleared = await clearStorage();
+        const notification = new Notification({
+          title: isStorageCleared
+            ? translations.menus.clearStorageSuccess
+            : translations.menus.clearStorageFailure,
+          body: isStorageCleared
+            ? translations.menus.clearStorageSuccessBody
+            : translations.menus.clearStorageFailureBody
+        });
+        notification.show();
+      }
+    }
   ]
 };
 

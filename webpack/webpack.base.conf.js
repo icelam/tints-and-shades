@@ -11,6 +11,7 @@ const alias = {
   '@constants': path.resolve(__dirname, '../src/constants.ts'),
   '@menus': path.resolve(__dirname, '../src/menus'),
   '@translations': path.resolve(__dirname, '../src/translations'),
+  '@types': path.resolve(__dirname, '../src/types.ts'),
   '@utils': path.resolve(__dirname, '../src/utils')
 };
 

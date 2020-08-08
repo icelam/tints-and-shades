@@ -1,9 +1,9 @@
 import appTranslations from './app';
-import menuItemsTranslations from './menuItems';
+import menusTranslations from './menus';
 
 const translations = {
   app: appTranslations,
-  menuItems: menuItemsTranslations
+  menus: menusTranslations
 };
 
 export default translations;

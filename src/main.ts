@@ -6,6 +6,7 @@ import {
 import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
 import { applicationMenu, settingMenu } from '@menus';
 import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
+import { Position } from '@types';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;
@@ -84,7 +85,7 @@ ipcMain.on('PIN_APP', (_, value: boolean) => {
   mainWindow?.setAlwaysOnTop(value);
 });
 
-ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: { x: number, y: number }) => {
+ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: Position) => {
   settingMenu.popup({
     window: mainWindow,
     x: mousePosition.x,

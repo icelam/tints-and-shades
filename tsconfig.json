@@ -32,6 +32,7 @@
       "@menus/*": ["./src/menus/*"],
       "@translations": ["src/translations/index.ts"],
       "@translations/*": ["src/translations/*"],
+      "@types": ["src/types.ts"],
       "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"]
     }

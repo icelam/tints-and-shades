@@ -25,6 +25,7 @@
             ["@constants", "./src/constants.ts"],
             ["@menus", "./src/menus"],
             ["@translations", "./src/translations"],
+            ["@types", "./src/types.ts"],
             ["@utils", "./src/utils"]
           ],
           "extensions": [".js", ".ts"]
