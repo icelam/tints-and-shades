@@ -45,6 +45,12 @@ export const saveWindowPositionToStorage = (x?: number, y?: number): void => {
 };
 
 /**
+ * Get storage path
+ * @returns {string} folder path which contains all the stored json
+ */
+export const getStoragePath = (): string => storage.getDataPath();
+
+/**
  * Clear all preference saved in storage
  * @return {boolean} whether clear is success
  */

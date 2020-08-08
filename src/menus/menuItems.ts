@@ -15,7 +15,7 @@ import {
   V8_VERSION,
   APP_ICON_PATH
 } from '@constants';
-import { clearStorage } from '@utils';
+import { clearStorage, getStoragePath } from '@utils';
 
 export const copyFormatMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.copyFormat,
@@ -88,6 +88,7 @@ export const checkUpdatesMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.checkUpdates,
   accelerator: 'CmdOrCtrl+U'
   // TODO: Check for updates using latest release API from github
+  // https://api.github.com/repos/{{username}}/{{repo}}/releases/latest
 };
 
 export const reportIssueMenuItem: MenuItemConstructorOptions = {
@@ -107,6 +108,15 @@ export const developerMenuItem: MenuItemConstructorOptions = {
   submenu: [
     { label: translations.menus.toggleDevTools, role: 'toggleDevTools' },
     { label: translations.menus.reload, role: 'reload' },
+    { type: 'separator' },
+    {
+      label: translations.menus.inpsectStorage,
+      accelerator: 'CmdOrCtrl+Shift+S',
+      click: (): void => {
+        const storagePath = getStoragePath();
+        shell.showItemInFolder(storagePath);
+      }
+    },
     {
       label: translations.menus.clearStorage,
       accelerator: 'CmdOrCtrl+Shift+C',

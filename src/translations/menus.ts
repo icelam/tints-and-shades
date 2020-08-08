@@ -13,6 +13,7 @@ const menusTranslations = {
   developer: 'Developer',
   toggleDevTools: 'Toggle developer tools',
   reload: 'Reload',
+  inpsectStorage: 'Inspect storage',
   clearStorage: 'Clear storage',
   clearStorageSuccess: 'Storage cleared successfully!',
   clearStorageSuccessBody: 'All data stored in storage has been removed.',
