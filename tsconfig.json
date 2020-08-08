@@ -30,6 +30,8 @@
       "@constants": ["./src/constants.ts"],
       "@menus": ["./src/menus/index.ts"],
       "@menus/*": ["./src/menus/*"],
+      "@storage": ["./src/storage/index.ts"],
+      "@storage/*": ["./src/storage/*"],
       "@translations": ["src/translations/index.ts"],
       "@translations/*": ["src/translations/*"],
       "@types": ["src/types.ts"],

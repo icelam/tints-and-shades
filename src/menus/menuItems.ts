@@ -1,22 +1,16 @@
-import {
-  shell,
-  MenuItemConstructorOptions,
-  dialog,
-  MessageBoxOptions,
-  nativeImage,
-  Notification
-} from 'electron';
+import { MenuItemConstructorOptions } from 'electron';
 import translations from '@translations';
 import {
-  APP_VERSION,
-  ELECTRON_VERSION,
-  NODE_VERSION,
-  CHROME_VERSION,
-  V8_VERSION,
-  APP_ICON_PATH
-} from '@constants';
-import { clearStorage, getStoragePath } from '@utils';
+  showAboutDialog,
+  openIssuePage,
+  checkUpdates,
+  clearAppStorage,
+  openStorageFolder
+} from '@utils';
 
+/**
+ * Menu item for setting copy format
+ */
 export const copyFormatMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.copyFormat,
   submenu: [
@@ -39,6 +33,9 @@ export const copyFormatMenuItem: MenuItemConstructorOptions = {
   ]
 };
 
+/**
+ * Menu item for setting theme
+ */
 export const themeMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.theme,
   submenu: [
@@ -56,53 +53,43 @@ export const themeMenuItem: MenuItemConstructorOptions = {
   ]
 };
 
+/**
+ * Menu item for displaying application information
+ */
 export const aboutMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.about,
   accelerator: 'CmdOrCtrl+I',
-  click: (): void => {
-    const options: MessageBoxOptions = {
-      type: 'info',
-      icon: nativeImage.createFromPath(APP_ICON_PATH),
-      buttons: [translations.app.openGithub, translations.app.close],
-      defaultId: 1,
-      cancelId: 1,
-      noLink: true,
-      title: translations.menus.about,
-      message: `${translations.app.name} (v${APP_VERSION})`,
-      detail: `${translations.app.description}\n
-Electron version: ${ELECTRON_VERSION}
-Node version: ${NODE_VERSION}
-Chrome version: ${CHROME_VERSION}
-V8 version: ${V8_VERSION}\n`
-    };
-
-    dialog.showMessageBox(options).then(async ({ response }) => {
-      if (response === 0) {
-        await shell.openExternal(translations.app.githubUrl);
-      }
-    });
-  }
+  click: showAboutDialog
 };
 
+/**
+ * Menu item for checking updates
+ */
 export const checkUpdatesMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.checkUpdates,
-  accelerator: 'CmdOrCtrl+U'
-  // TODO: Check for updates using latest release API from github
-  // https://api.github.com/repos/{{username}}/{{repo}}/releases/latest
+  accelerator: 'CmdOrCtrl+U',
+  click: checkUpdates
 };
 
+/**
+ * Menu item for reporting issues
+ */
 export const reportIssueMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.reportIssue,
-  click: async (): Promise<void> => {
-    await shell.openExternal(translations.app.issueUrl);
-  }
+  click: openIssuePage
 };
 
+/**
+ * Menu item for quiting application
+ */
 export const quitMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.quitApplication,
   role: 'quit'
 };
 
+/**
+ * Menu item displayed only in development mode for debug purpose
+ */
 export const developerMenuItem: MenuItemConstructorOptions = {
   label: translations.menus.developer,
   submenu: [
@@ -112,30 +99,19 @@ export const developerMenuItem: MenuItemConstructorOptions = {
     {
       label: translations.menus.inpsectStorage,
       accelerator: 'CmdOrCtrl+Shift+S',
-      click: (): void => {
-        const storagePath = getStoragePath();
-        shell.showItemInFolder(storagePath);
-      }
+      click: openStorageFolder
     },
     {
       label: translations.menus.clearStorage,
       accelerator: 'CmdOrCtrl+Shift+C',
-      click: async (): Promise<void> => {
-        const isStorageCleared = await clearStorage();
-        const notification = new Notification({
-          title: isStorageCleared
-            ? translations.menus.clearStorageSuccess
-            : translations.menus.clearStorageFailure,
-          body: isStorageCleared
-            ? translations.menus.clearStorageSuccessBody
-            : translations.menus.clearStorageFailureBody
-        });
-        notification.show();
-      }
+      click: clearAppStorage
     }
   ]
 };
 
+/**
+ * Menu which is displayed as the first item in menu bar of macOS
+ */
 export const appMenuItem: MenuItemConstructorOptions = {
   label: translations.app.name,
   submenu: [

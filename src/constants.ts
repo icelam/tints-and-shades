@@ -15,7 +15,7 @@ export const IS_LINUX = [
 
 export const IS_DEVELOPEMENT = process.env.NODE_ENV === 'development';
 
-export const APP_VERSION = '0.1.0';
+export const APP_VERSION = 'v0.1.0';
 
 const { versions } = process;
 export const ELECTRON_VERSION = versions.electron;
@@ -24,3 +24,6 @@ export const CHROME_VERSION = versions.chrome;
 export const V8_VERSION = versions.v8;
 
 export const APP_ICON_PATH = path.join(__dirname, './icon.png');
+
+export const GITHUB_REPO_URL = 'http://github.com/icelam/tints-and-shades';
+export const GITHUB_RELEASE_API = 'https://api.github.com/repos/icelam/tints-and-shades/releases/latest';

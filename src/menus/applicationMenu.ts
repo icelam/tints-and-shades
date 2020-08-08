@@ -9,6 +9,9 @@ import {
   developerMenuItem
 } from './menuItems';
 
+/**
+ * Menu template for creating application menu displayed in macOS
+ */
 const applicationMenuTemplate: MenuItemConstructorOptions[] = [
   appMenuItem,
   copyFormatMenuItem,
@@ -19,6 +22,9 @@ if (IS_DEVELOPEMENT) {
   applicationMenuTemplate.push(developerMenuItem);
 }
 
+/**
+ * Application menu displayed in macOS
+ */
 const applicationMenu = Menu.buildFromTemplate(applicationMenuTemplate);
 
 export default applicationMenu;

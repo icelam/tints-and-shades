@@ -50,7 +50,6 @@
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "sass-loader": "^9.0.2",
-    "standard-version": "^8.0.2",
     "style-loader": "^1.2.1",
     "svg-inline-loader": "^0.8.2",
     "ts-loader": "^8.0.2",
@@ -75,8 +74,8 @@
     "package": "yarn clean:package && yarn build && electron-builder build -mwl --x64 --ia32",
     "clean:package": "rimraf ./build-packages",
     "analyze:web": "wca analyze \"src/**/*.ts\" --outFile wca-report.json",
-    "first-release": "standard-version --commit-all --tag-prefix v --first-release --infile CHANGELOG.md",
-    "release": "standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
+    "first-release": "npx standard-version --commit-all --tag-prefix v --first-release --infile CHANGELOG.md",
+    "release": "npx standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
     "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts"
   },
   "build": {

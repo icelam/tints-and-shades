@@ -3,7 +3,8 @@ import * as url from 'url';
 import {
   app, BrowserWindow, Menu, ipcMain
 } from 'electron';
-import { getStoredWindowLocation, saveWindowPositionToStorage, debounce } from '@utils';
+import { debounce } from '@utils';
+import { getStoredWindowLocation, saveWindowPositionToStorage } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
 import { Position } from '@types';
@@ -55,6 +56,7 @@ const createWindow = async () => {
   }, 500));
 };
 
+// TODO: check for updates when app starts
 app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {

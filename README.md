@@ -34,3 +34,9 @@ Run `analyze:web` in the project root folder.
 ### To update change log ###
 Run `yarn release` in the project root folder.  
 To skip bumping version number on first release, run `yarn first-release` in the project root folder
+
+## To update alias ##
+To add or modify any existing alias, please modify all the files listed below:
+1. `.eslintrc`
+2. `tsconfig.json`
+3. `webpack/webpack.base.conf.js`

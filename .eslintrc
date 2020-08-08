@@ -24,6 +24,7 @@
             ["@styles", "./src/renderer/assets/scss"],
             ["@constants", "./src/constants.ts"],
             ["@menus", "./src/menus"],
+            ["@storage", "./src/storage"],
             ["@translations", "./src/translations"],
             ["@types", "./src/types.ts"],
             ["@utils", "./src/utils"]

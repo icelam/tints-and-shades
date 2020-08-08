@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 import {
-  LitElement, html, property, customElement, TemplateResult
+  LitElement, html, css, CSSResult, property, customElement, TemplateResult
 } from 'lit-element';
 import '@components/Header/FrameHeader';
 
@@ -9,6 +9,14 @@ import '@components/Header/FrameHeader';
  */
 @customElement('generator-app')
 class GeneratorApp extends LitElement {
+  static get styles(): CSSResult {
+    return css`
+      :host {
+        display: block;
+      }
+    `;
+  }
+
   /**
    * Whether the current frame set to always on top or not.
    */

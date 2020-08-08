@@ -8,6 +8,9 @@ import {
   quitMenuItem
 } from './menuItems';
 
+/**
+ * Menu template for creating setting menu
+ */
 const settingMenuTemplate: MenuItemConstructorOptions[] = [
   copyFormatMenuItem,
   { type: 'separator' },
@@ -19,6 +22,9 @@ const settingMenuTemplate: MenuItemConstructorOptions[] = [
   quitMenuItem
 ];
 
+/**
+ * Setting menu displayed when clicking the setting icon
+ */
 const settingMenu = Menu.buildFromTemplate(settingMenuTemplate);
 
 export default settingMenu;

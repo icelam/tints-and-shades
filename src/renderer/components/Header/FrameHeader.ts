@@ -21,7 +21,6 @@ class FrameHeader extends LitElement {
           background-color: var(--color-frame-header-background);
           color: var(--color-frame-header-text);
           padding: 0.6875rem;
-          display: block;
           display: flex;
           justify-content: space-between;
           align-items: center;
