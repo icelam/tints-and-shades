@@ -1,6 +1,7 @@
 const path = require('path');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const WebpackElectronReloadPlugin = require('./plugins/webpack-electron-reload-plugin.js');
 
@@ -26,7 +27,7 @@ const rendererWebpack = merge(baseWebpackConfig[0], {
     // Webpack dev server seems to only accept the first devSever config in mulit-compiler mode
     // Allowing main.js to write to disk so that electron can start
     writeToDisk: (filePath) => {
-      const filesToEmit = [/main\.js$/, /icon\.png$/];
+      const filesToEmit = [/main\.js$/, /preload\.js$/, /icon\.png$/];
       return filesToEmit.some((file) => file.test(filePath));
     }
   },

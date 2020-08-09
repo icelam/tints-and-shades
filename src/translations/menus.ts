@@ -6,6 +6,7 @@ const menusTranslations = {
   theme: 'Theme',
   lightTheme: 'Light',
   darkTheme: 'Dark',
+  useSystemTheme: 'Use system setting',
   about: 'About',
   reportIssue: 'Report an issue',
   checkUpdates: 'Check for updates',

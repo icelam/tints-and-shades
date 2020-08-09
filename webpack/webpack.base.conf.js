@@ -17,7 +17,7 @@ const alias = {
 };
 
 const rendererWebpack = {
-  target: 'electron-renderer',
+  // target: 'electron-renderer',
   entry: {
     app: [path.resolve(__dirname, '../src/renderer/index.ts')]
   },
@@ -99,7 +99,8 @@ const rendererWebpack = {
 const mainWebpack = {
   target: 'electron-main',
   entry: {
-    main: [path.resolve(__dirname, '../src/main.ts')]
+    main: [path.resolve(__dirname, '../src/main.ts')],
+    preload: [path.resolve(__dirname, '../src/preload.ts')]
   },
   output: {
     path: path.join(__dirname, '../dist'),

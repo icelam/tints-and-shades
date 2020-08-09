@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron';
 import {
   LitElement, html, css, CSSResult, property, customElement, TemplateResult
 } from 'lit-element';
@@ -37,24 +36,24 @@ class GeneratorApp extends LitElement {
   }
 
   private closeFrame() {
-    ipcRenderer.send('QUIT_APP');
+    window.ipcRenderer.send('QUIT_APP');
   }
 
   private openSettingMenu(event: MouseEvent) {
-    ipcRenderer.send('OPEN_SETTING_MENU', {
+    window.ipcRenderer.send('OPEN_SETTING_MENU', {
       x: event.clientX + 10,
       y: event.clientY + 10
     });
   }
 
   private minimizeFrame() {
-    ipcRenderer.send('MINIMIZE_APP');
+    window.ipcRenderer.send('MINIMIZE_APP');
   }
 
   private pinFrame() {
     const newPinState = !this.shouldPinFrame;
     this.shouldPinFrame = newPinState;
-    ipcRenderer.send('PIN_APP', newPinState);
+    window.ipcRenderer.send('PIN_APP', newPinState);
   }
 }
 

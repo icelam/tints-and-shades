@@ -1,9 +1,47 @@
 import * as storage from 'electron-json-storage';
 import log from 'electron-log';
-import { Position } from '@types';
+import { Position, AppThemeOptions, AppThemeStorage } from '@types';
 
-const POSITION_STORAGE_PATH = 'window.position';
+const POSITION_STORAGE_PATH = 'windowPosition';
+const THEME_STORAGE_PATH = 'appTheme';
 // const PIN_STATUS_STORAGE_PATH = 'window.pin';
+
+/**
+ * Get user defined theme preference stored in storage
+ * @returns {AppThemeStorage} theme preference stored as JSON
+ */
+export const getAppTheme = async (): Promise<AppThemeStorage> => {
+  try {
+    const appTheme = await new Promise((resolve, reject) => {
+      storage.get(THEME_STORAGE_PATH, (error: Error, data: Position) => {
+        if (error) { reject(error); }
+        resolve(data);
+      });
+    });
+    return appTheme as AppThemeStorage;
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from getAppTheme()');
+    return {};
+  }
+};
+
+/**
+ * Save user defined theme preference to storage
+ * @param {AppThemeOptions} user defined theme
+ */
+export const saveAppTheme = (theme?: AppThemeOptions): void => {
+  try {
+    if (!theme) {
+      throw new Error('Theme not provided when trying to save theme');
+    }
+
+    storage.set(THEME_STORAGE_PATH, { theme }, (error) => {
+      if (error) { throw error; }
+    });
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from saveAppTheme()');
+  }
+};
 
 /**
  * Get window position stored in storage
@@ -32,7 +70,7 @@ export const getStoredWindowLocation = async (): Promise<Position> => {
 export const saveWindowPositionToStorage = (x?: number, y?: number): void => {
   try {
     if (!x || !y) {
-      throw new Error('Missing X or Y in position');
+      throw new Error('Missing X or Y in position when trying to save window position');
     }
 
     const windowPositionData: Position = { x, y };

@@ -1,7 +1,6 @@
 const path = require('path');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
@@ -21,16 +20,6 @@ const rendererWebpack = merge(baseWebpackConfig[0], {
   plugins: [
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          context: path.resolve(__dirname, '../node_modules/@webcomponents/webcomponentsjs'),
-          from: '**/*.js',
-          to: 'assets/js/vendors/webcomponents',
-          globOptions: { ignore: ['**/.DS_Store'] }
-        }
-      ]
     }),
     new MiniCssExtractPlugin({
       filename: 'assets/css/[name].[chunkhash:8].css'

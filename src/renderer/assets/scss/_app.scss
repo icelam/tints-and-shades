@@ -16,4 +16,6 @@ body {
   line-height: 1.5;
   font-family: 'Source Code Pro', monospace, sans-serif;
   -webkit-text-size-adjust: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }

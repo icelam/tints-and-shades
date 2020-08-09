@@ -5,7 +5,8 @@ import {
   openIssuePage,
   checkUpdates,
   clearAppStorage,
-  openStorageFolder
+  openStorageFolder,
+  setAppTheme
 } from '@utils';
 
 /**
@@ -42,13 +43,26 @@ export const themeMenuItem: MenuItemConstructorOptions = {
     {
       label: translations.menus.lightTheme,
       type: 'radio',
-      checked: true
-      // TODO: Set Light theme, share value between setting menu and app menu
+      id: 'light-theme',
+      click: (): void => {
+        setAppTheme('light');
+      }
     },
     {
       label: translations.menus.darkTheme,
-      type: 'radio'
-      // TODO: Set Dark theme, share value between setting menu and app menu
+      type: 'radio',
+      id: 'dark-theme',
+      click: (): void => {
+        setAppTheme('dark');
+      }
+    },
+    {
+      label: translations.menus.useSystemTheme,
+      type: 'radio',
+      id: 'system-theme',
+      click: (): void => {
+        setAppTheme('system');
+      }
     }
   ]
 };

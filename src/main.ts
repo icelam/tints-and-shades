@@ -1,13 +1,13 @@
 import * as path from 'path';
 import * as url from 'url';
 import {
-  app, BrowserWindow, Menu, ipcMain
+  app, BrowserWindow, Menu, ipcMain, nativeTheme
 } from 'electron';
-import { debounce } from '@utils';
+import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
 import { getStoredWindowLocation, saveWindowPositionToStorage } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
-import { Position } from '@types';
+import { Position, AppThemeOptions } from '@types';
 
 const WINDOW_WIDTH = 396;
 const WINDOW_HEIGHT = 190;
@@ -27,9 +27,11 @@ const createWindow = async () => {
     x: WINDOW_POSITION?.x ?? undefined,
     y: WINDOW_POSITION?.y ?? undefined,
     resizable: false,
-    backgroundColor: '#ffffff', // TODO: dark mode
+    backgroundColor: nativeTheme.shouldUseDarkColors
+      ? '#2d2d2d'
+      : '#ffffff',
     webPreferences: {
-      nodeIntegration: true,
+      preload: path.join(__dirname, './preload.js'),
       devTools: IS_DEVELOPEMENT
     },
     // For app icon to be displayed correctly on linux AppImage
@@ -77,6 +79,19 @@ app.on('activate', () => {
 
 // Application menu bar
 Menu.setApplicationMenu(applicationMenu);
+
+// It would be good to move setInitialTheme into menuItem.ts
+// However, it would mean to make settingMenu as an async function which would be hard to import
+// Another apporach is to move this to utils folder but it will breaks other menu items
+// since introducing `settingMenu` would introduce circular self-reference
+// TODO: Rethink the approach of initializing checked theme value
+const setInitialTheme = async () => {
+  const userPreference = await getUserPreferedTheme();
+  const initialAppTheme: AppThemeOptions = userPreference ?? 'system';
+  settingMenu.getMenuItemById(`${initialAppTheme}-theme`).checked = true;
+};
+setInitialTheme();
+listenToSystemThemeChange();
 
 // Event Handlers
 ipcMain.on('QUIT_APP', () => mainWindow?.close());

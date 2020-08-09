@@ -12,6 +12,10 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb-base",
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "settings": {
     "import/resolver": [
       "node",
@@ -62,7 +66,7 @@
   },
   "overrides": [
     {
-      "files": ["webpack/**/*.js", "scripts/**/*.js"],
+      "files": ["webpack/**/*.js", "scripts/**/*.js", "src/**/*.html"],
       "parser": "espree",
       "parserOptions": {},
       "extends": [
