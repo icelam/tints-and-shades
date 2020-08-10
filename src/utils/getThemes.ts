@@ -1,7 +1,8 @@
 /**
- *This file would be shared with renderer.
+ * This file would be shared with renderer.
  * Please ONLY import and use things that is allowed in renderer
  */
+// TODO: rewrite remote with invoke pattern
 import { nativeTheme, remote } from 'electron';
 import { AppTheme, AppThemeOptions } from '@types';
 import { getAppTheme } from '@storage';

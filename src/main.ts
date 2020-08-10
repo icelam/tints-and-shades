@@ -32,7 +32,8 @@ const createWindow = async () => {
       : '#ffffff',
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
-      devTools: IS_DEVELOPEMENT
+      devTools: IS_DEVELOPEMENT,
+      enableRemoteModule: true
     },
     // For app icon to be displayed correctly on linux AppImage
     // https://github.com/electron-userland/electron-builder/issues/2269
