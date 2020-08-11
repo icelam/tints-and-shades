@@ -25,6 +25,7 @@
             ["@components", "./src/renderer/components"],
             ["@fonts", "./src/renderer/assets/fonts"],
             ["@images", "./src/renderer/assets/images"],
+            ["@pages", "./src/renderer/pages"],
             ["@styles", "./src/renderer/assets/scss"],
             ["@constants", "./src/constants.ts"],
             ["@menus", "./src/menus"],

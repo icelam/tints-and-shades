@@ -7,6 +7,7 @@ const alias = {
   '@components': path.resolve(__dirname, '../src/renderer/components'),
   '@fonts': path.resolve(__dirname, '../src/renderer/assets/fonts'),
   '@images': path.resolve(__dirname, '../src/renderer/assets/images'),
+  '@pages': path.resolve(__dirname, '../src/renderer/pages'),
   '@styles': path.resolve(__dirname, '../src/renderer/assets/scss'),
   '@constants': path.resolve(__dirname, '../src/constants.ts'),
   '@menus': path.resolve(__dirname, '../src/menus'),

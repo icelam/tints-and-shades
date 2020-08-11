@@ -2,6 +2,7 @@ import {
   LitElement, html, css, CSSResult, property, customElement, TemplateResult
 } from 'lit-element';
 import '@components/Header/FrameHeader';
+import '@pages/TintsShadesGenerator';
 
 /**
  * Enrty point of the app
@@ -22,6 +23,11 @@ class GeneratorApp extends LitElement {
   @property({ type: Boolean })
   shouldPinFrame = false; // TODO: Save and get value from storage on app load
 
+  /**
+   * Current selectedColor from user
+   */
+  @property({ type: String }) selectedColor = '#46beb9';
+
   render(): TemplateResult {
     return html`
       <frame-header
@@ -32,6 +38,11 @@ class GeneratorApp extends LitElement {
         .openSettingMenu=${this.openSettingMenu}
       >
       </frame-header>
+      <tints-shades-generator
+        .selectedColor=${this.selectedColor}
+        .onColorPickerChange=${this.onColorPickerChange}
+      >
+      </tints-shades-generator>
     `;
   }
 
@@ -54,6 +65,10 @@ class GeneratorApp extends LitElement {
     const newPinState = !this.shouldPinFrame;
     this.shouldPinFrame = newPinState;
     window.ipcRenderer.send('PIN_APP', newPinState);
+  }
+
+  private onColorPickerChange(event) {
+    this.selectedColor = event.target.value;
   }
 }
 
