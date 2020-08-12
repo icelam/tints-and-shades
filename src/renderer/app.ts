@@ -33,14 +33,14 @@ class GeneratorApp extends LitElement {
       <frame-header
         .closeFrame=${this.closeFrame}
         .minimizeFrame=${this.minimizeFrame}
-        .pinFrame=${this.pinFrame}
+        .pinFrame=${this.pinFrame.bind(this)}
         .shouldPinFrame=${this.shouldPinFrame}
         .openSettingMenu=${this.openSettingMenu}
       >
       </frame-header>
       <tints-shades-generator
         .selectedColor=${this.selectedColor}
-        .onColorPickerChange=${this.onColorPickerChange}
+        .onColorPickerChange=${this.onColorPickerChange.bind(this)}
       >
       </tints-shades-generator>
     `;
