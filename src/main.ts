@@ -4,7 +4,7 @@ import {
   app, BrowserWindow, Menu, ipcMain, nativeTheme
 } from 'electron';
 import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
-import { getStoredWindowLocation, saveWindowPositionToStorage } from '@storage';
+import { getWindowLocation, saveWindowPosition } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
 import { Position, AppThemeOptions } from '@types';
@@ -15,7 +15,7 @@ const WINDOW_HEIGHT = 190;
 let mainWindow: BrowserWindow;
 
 const createWindow = async () => {
-  const WINDOW_POSITION = await getStoredWindowLocation();
+  const WINDOW_POSITION = await getWindowLocation();
 
   mainWindow = new BrowserWindow({
     frame: false,
@@ -55,7 +55,7 @@ const createWindow = async () => {
 
   mainWindow.on('move', debounce(() => {
     const { x, y } = mainWindow?.getBounds() ?? {};
-    saveWindowPositionToStorage(x, y);
+    saveWindowPosition(x, y);
   }, 500));
 };
 

@@ -47,7 +47,7 @@ export const saveAppTheme = (theme?: AppThemeOptions): void => {
  * Get window position stored in storage
  * @returns {Position} window position stored when window is moved
  */
-export const getStoredWindowLocation = async (): Promise<Position> => {
+export const getWindowLocation = async (): Promise<Position> => {
   try {
     const windowPosition = await new Promise((resolve, reject) => {
       storage.get(POSITION_STORAGE_PATH, (error: Error, data: Position) => {
@@ -57,7 +57,7 @@ export const getStoredWindowLocation = async (): Promise<Position> => {
     });
     return windowPosition as Position;
   } catch (error) {
-    log.error(error?.message ?? 'Unknown error from getStoredWindowLocation()');
+    log.error(error?.message ?? 'Unknown error from getWindowLocation()');
     return {};
   }
 };
@@ -67,7 +67,7 @@ export const getStoredWindowLocation = async (): Promise<Position> => {
  * @param {number} x - X coordinate of window position
  * @param {number} y - Y coordinate of window position
  */
-export const saveWindowPositionToStorage = (x?: number, y?: number): void => {
+export const saveWindowPosition = (x?: number, y?: number): void => {
   try {
     if (!x || !y) {
       throw new Error('Missing X or Y in position when trying to save window position');
@@ -78,7 +78,7 @@ export const saveWindowPositionToStorage = (x?: number, y?: number): void => {
       if (error) { throw error; }
     });
   } catch (error) {
-    log.error(error?.message ?? 'Unknown error from saveWindowPositionToStorage()');
+    log.error(error?.message ?? 'Unknown error from saveWindowPosition()');
   }
 };
 
