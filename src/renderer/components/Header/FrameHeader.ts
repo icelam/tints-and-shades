@@ -32,8 +32,8 @@ class FrameHeader extends LitElement {
         }
 
         .frame-control-button {
-          width: 0.75rem;
-          height: 0.75rem;
+          width: 0.875rem;
+          height: 0.875rem;
           -webkit-border-radius: 100%;
           -moz-border-radius: 100%;
           border-radius: 100%;
@@ -42,8 +42,8 @@ class FrameHeader extends LitElement {
 
         .frame-control-button > span {
           font-family: 'Roboto-Regular', sans-serif;
-          line-height: 0.75rem;
-          font-size: 0.75rem;
+          line-height: 0.875rem;
+          font-size: 0.875rem;
           display: block;
           opacity: 0;
           transition: opacity 0.1s linear;
