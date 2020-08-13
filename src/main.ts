@@ -4,7 +4,9 @@ import {
   app, BrowserWindow, Menu, ipcMain, nativeTheme
 } from 'electron';
 import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
-import { getWindowLocation, saveWindowPosition } from '@storage';
+import {
+  getWindowLocation, saveWindowPosition, getWindowPinStatus, saveWindowPinStatus
+} from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
 import { Position, AppThemeOptions } from '@types';
@@ -16,6 +18,7 @@ let mainWindow: BrowserWindow;
 
 const createWindow = async () => {
   const WINDOW_POSITION = await getWindowLocation();
+  const { isPinned: INITIAL_WINDOW_PIN_STATUS } = await getWindowPinStatus();
 
   mainWindow = new BrowserWindow({
     frame: false,
@@ -45,6 +48,8 @@ const createWindow = async () => {
     protocol: 'file:',
     slashes: true
   });
+
+  mainWindow?.setAlwaysOnTop(INITIAL_WINDOW_PIN_STATUS ?? false);
 
   mainWindow.loadURL(startUrl);
 
@@ -101,6 +106,7 @@ ipcMain.on('MINIMIZE_APP', () => mainWindow?.minimize());
 
 ipcMain.on('PIN_APP', (_, value: boolean) => {
   mainWindow?.setAlwaysOnTop(value);
+  saveWindowPinStatus(value);
 });
 
 ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: Position) => {

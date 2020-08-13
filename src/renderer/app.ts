@@ -18,10 +18,19 @@ class GeneratorApp extends LitElement {
   }
 
   /**
-   * Whether the current frame set to always on top or not.
+   * Whether the current frame is set to always on top or not.
    */
-  @property({ type: Boolean })
-  shouldPinFrame = false; // TODO: Save and get value from storage on app load
+  @property({
+    type: Boolean,
+    converter(value) {
+      // HTML attributes was use to set the status storage in storage
+      // and it only accepts string value, boolean convertion is done here
+      return typeof value === 'boolean'
+        ? value
+        : value === 'true';
+    }
+  })
+  shouldPinFrame = false;
 
   /**
    * Current selectedColor from user

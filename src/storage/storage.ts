@@ -1,10 +1,12 @@
 import * as storage from 'electron-json-storage';
 import log from 'electron-log';
-import { Position, AppThemeOptions, AppThemeStorage } from '@types';
+import {
+  Position, AppThemeOptions, AppThemeStorage, PinStatusStorage
+} from '@types';
 
-const POSITION_STORAGE_PATH = 'windowPosition';
+const WINDOW_POSITION_STORAGE_PATH = 'windowPosition';
 const THEME_STORAGE_PATH = 'appTheme';
-// const PIN_STATUS_STORAGE_PATH = 'window.pin';
+const WINDOW_PIN_STATUS_STORAGE_PATH = 'windowPinStatus';
 
 /**
  * Get user defined theme preference stored in storage
@@ -35,7 +37,8 @@ export const saveAppTheme = (theme?: AppThemeOptions): void => {
       throw new Error('Theme not provided when trying to save theme');
     }
 
-    storage.set(THEME_STORAGE_PATH, { theme }, (error) => {
+    const themeData: AppThemeStorage = { theme };
+    storage.set(THEME_STORAGE_PATH, themeData, (error) => {
       if (error) { throw error; }
     });
   } catch (error) {
@@ -50,7 +53,7 @@ export const saveAppTheme = (theme?: AppThemeOptions): void => {
 export const getWindowLocation = async (): Promise<Position> => {
   try {
     const windowPosition = await new Promise((resolve, reject) => {
-      storage.get(POSITION_STORAGE_PATH, (error: Error, data: Position) => {
+      storage.get(WINDOW_POSITION_STORAGE_PATH, (error: Error, data: Position) => {
         if (error) { reject(error); }
         resolve(data);
       });
@@ -74,11 +77,49 @@ export const saveWindowPosition = (x?: number, y?: number): void => {
     }
 
     const windowPositionData: Position = { x, y };
-    storage.set(POSITION_STORAGE_PATH, windowPositionData, (error) => {
+    storage.set(WINDOW_POSITION_STORAGE_PATH, windowPositionData, (error) => {
       if (error) { throw error; }
     });
   } catch (error) {
     log.error(error?.message ?? 'Unknown error from saveWindowPosition()');
+  }
+};
+
+/**
+ * Get window pin status stored in storage
+ * @returns {PinStatusStorage} JSON that indicates whether window is always on top
+ */
+export const getWindowPinStatus = async (): Promise<PinStatusStorage> => {
+  try {
+    const pinStatus = await new Promise((resolve, reject) => {
+      storage.get(WINDOW_PIN_STATUS_STORAGE_PATH, (error: Error, data: PinStatusStorage) => {
+        if (error) { reject(error); }
+        resolve(data);
+      });
+    });
+    return pinStatus as PinStatusStorage;
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from getPinStatus()');
+    return {};
+  }
+};
+
+/**
+ * Save window pin status to storage
+ * @param {boolean} whether window is set to always on top
+ */
+export const saveWindowPinStatus = (isWindowPinned?: boolean): void => {
+  try {
+    if (typeof isWindowPinned !== 'boolean') {
+      throw new Error('Status not defined when trying to save window pin status');
+    }
+
+    const pinStatusData: PinStatusStorage = { isPinned: isWindowPinned };
+    storage.set(WINDOW_PIN_STATUS_STORAGE_PATH, pinStatusData, (error) => {
+      if (error) { throw error; }
+    });
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from savePinStatus()');
   }
 };
 

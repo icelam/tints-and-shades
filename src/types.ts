@@ -4,6 +4,12 @@ export type Position = {
 
 export type AppTheme = 'light' | 'dark';
 export type AppThemeOptions = AppTheme | 'system';
+
+// Storage
+export type PinStatusStorage = {
+  isPinned?: boolean;
+};
+
 export type AppThemeStorage = {
   theme?: AppThemeOptions;
 }
