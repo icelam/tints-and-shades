@@ -8,7 +8,9 @@ import {
   getWindowLocation, saveWindowPosition, getWindowPinStatus, saveWindowPinStatus
 } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
-import { IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH } from '@constants';
+import {
+  IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH, IS_MAC
+} from '@constants';
 import { Position, AppThemeOptions } from '@types';
 
 const WINDOW_WIDTH = 396;
@@ -70,7 +72,7 @@ app.whenReady().then(createWindow);
 app.on('window-all-closed', () => {
   // On macOS it's common for applications and their menu bar to stay active
   // until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (!IS_MAC) {
     app.quit();
   }
 });
