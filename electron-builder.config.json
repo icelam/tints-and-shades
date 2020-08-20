@@ -1,0 +1,43 @@
+{
+  "productName": "Tints and Shades",
+  "appId": "io.github.icelam.tintsandshades",
+  "extends": null,
+  "files": [
+    "dist/**/*",
+    "dist/utils/**/*",
+    "package.json"
+  ],
+  "dmg": {
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "win": {
+    "target": [
+      "nsis",
+      "msi",
+      "portable"
+    ]
+  },
+  "linux": {
+    "target": [
+      "deb",
+      "rpm",
+      "AppImage"
+    ],
+    "category": "Development"
+  },
+  "directories": {
+    "buildResources": "resources",
+    "output": "build-packages"
+  }
+}

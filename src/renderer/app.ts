@@ -13,6 +13,8 @@ class GeneratorApp extends LitElement {
     return css`
       :host {
         display: block;
+        background-color: var(--color-background);
+        height: 100%;
       }
     `;
   }
@@ -35,6 +37,7 @@ class GeneratorApp extends LitElement {
   /**
    * Current selectedColor from user
    */
+  // TODO: Save and restore selected color from storage
   @property({ type: String }) selectedColor = '#46beb9';
 
   render(): TemplateResult {
@@ -55,28 +58,28 @@ class GeneratorApp extends LitElement {
     `;
   }
 
-  private closeFrame() {
+  private closeFrame(): void {
     window.ipcRenderer.send('QUIT_APP');
   }
 
-  private openSettingMenu(event: MouseEvent) {
+  private openSettingMenu(event: MouseEvent): void {
     window.ipcRenderer.send('OPEN_SETTING_MENU', {
       x: event.clientX + 10,
       y: event.clientY + 10
     });
   }
 
-  private minimizeFrame() {
+  private minimizeFrame(): void {
     window.ipcRenderer.send('MINIMIZE_APP');
   }
 
-  private pinFrame() {
+  private pinFrame(): void {
     const newPinState = !this.shouldPinFrame;
     this.shouldPinFrame = newPinState;
     window.ipcRenderer.send('PIN_APP', newPinState);
   }
 
-  private onColorPickerChange(event) {
+  private onColorPickerChange(event): void {
     this.selectedColor = event.target.value;
   }
 }

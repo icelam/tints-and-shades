@@ -6,6 +6,6 @@ import '@styles/index.scss';
 import './app';
 
 // Event Handlers for handiing events sent from main process
-window.ipcRenderer.on('CHANGE_RENDERER_THEME', (_, theme: AppTheme) => {
+window.ipcRenderer?.on('CHANGE_RENDERER_THEME', (_, theme: AppTheme) => {
   window.document.documentElement.setAttribute('data-theme', theme);
 });

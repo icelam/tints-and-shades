@@ -9,32 +9,38 @@ import {
 } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import {
-  IS_DEVELOPEMENT, IS_LINUX, APP_ICON_PATH, IS_MAC
+  IS_DEVELOPEMENT,
+  IS_LINUX,
+  APP_ICON_PATH,
+  IS_MAC,
+  MAIN_WINDOW_WIDTH,
+  MAIN_WINDOW_HEIGHT
 } from '@constants';
 import { Position, AppThemeOptions } from '@types';
 
-const WINDOW_WIDTH = 396;
-const WINDOW_HEIGHT = 190;
-
 let mainWindow: BrowserWindow;
 
+/**
+ * Create main application window
+ */
 const createWindow = async () => {
   const WINDOW_POSITION = await getWindowLocation();
-  const { isPinned: INITIAL_WINDOW_PIN_STATUS } = await getWindowPinStatus();
+  const { isPinned: initialWindowPinStatus } = await getWindowPinStatus();
 
   mainWindow = new BrowserWindow({
     frame: false,
     show: false, // Hide window until page is ready whe 'ready-to-show' is emitted
-    transparent: false,
+    transparent: true,
     autoHideMenuBar: true,
-    width: WINDOW_WIDTH,
-    height: WINDOW_HEIGHT,
+    width: MAIN_WINDOW_WIDTH,
+    height: MAIN_WINDOW_HEIGHT,
     x: WINDOW_POSITION?.x ?? undefined,
     y: WINDOW_POSITION?.y ?? undefined,
     resizable: false,
     backgroundColor: nativeTheme.shouldUseDarkColors
       ? '#2d2d2d'
       : '#ffffff',
+    alwaysOnTop: initialWindowPinStatus ?? false,
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
       devTools: IS_DEVELOPEMENT,
@@ -51,13 +57,10 @@ const createWindow = async () => {
     slashes: true
   });
 
-  mainWindow?.setAlwaysOnTop(INITIAL_WINDOW_PIN_STATUS ?? false);
-
   mainWindow.loadURL(startUrl);
 
   mainWindow.once('ready-to-show', () => {
     mainWindow?.show();
-    // IS_DEVELOPEMENT && mainWindow?.webContents.openDevTools();
   });
 
   mainWindow.on('move', debounce(() => {
@@ -66,6 +69,7 @@ const createWindow = async () => {
   }, 500));
 };
 
+// App listener bindings
 // TODO: check for updates when app starts
 app.whenReady().then(createWindow);
 

@@ -45,7 +45,8 @@ const rendererWebpack = {
       ]
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../src/renderer/index.html'),
+      filename: 'index.html',
+      template: path.resolve(__dirname, '../src/renderer/index.pug'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -60,11 +61,18 @@ const rendererWebpack = {
   module: {
     rules: [
       {
+        test: /\.pug(\?.*)?$/,
+        use: [
+          'html-loader',
+          'pug-html-loader'
+        ]
+      },
+      {
         test: /\.(html|htm)(\?.*)?$/,
         loader: 'html-loader'
       },
       {
-        test: /\.svg$/,
+        test: /\.svg(\?.*)?$/,
         loader: 'svg-inline-loader',
         exclude: [
           path.resolve(__dirname, '../src/renderer/assets/fonts')
@@ -140,6 +148,10 @@ const mainWebpack = {
             loader: 'babel-loader'
           }
         ]
+      },
+      {
+        test: /\.node$/,
+        use: 'node-loader'
       }
     ]
   }

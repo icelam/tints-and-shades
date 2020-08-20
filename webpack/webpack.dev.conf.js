@@ -1,7 +1,5 @@
-const path = require('path');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const WebpackElectronReloadPlugin = require('./plugins/webpack-electron-reload-plugin.js');
 

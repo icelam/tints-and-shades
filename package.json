@@ -6,10 +6,7 @@
   "description": "Tints and Shades - Built with Electron and LitElement.",
   "private": true,
   "main": "dist/main.js",
-  "dependencies": {
-    "electron-json-storage": "^4.2.0",
-    "electron-log": "^4.2.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -32,6 +29,9 @@
     "cssnano": "^4.1.10",
     "electron": "^9.1.2",
     "electron-builder": "^22.8.0",
+    "electron-json-storage": "^4.2.0",
+    "electron-log": "^4.2.2",
+    "electron-rebuild": "^1.11.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -45,9 +45,11 @@
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
     "mini-css-extract-plugin": "^0.9.0",
+    "node-loader": "^1.0.1",
     "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
+    "pug-html-loader": "^1.1.5",
     "rimraf": "^3.0.2",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
@@ -64,61 +66,21 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.conf.js",
-    "start:electron": "ELECTRON_START_URL=http://localhost:8888 electron .",
+    "start:electron": "ELECTRON_START_URL=http://localhost:8888 electron --inspect=5858 .",
     "build": "webpack --config webpack/webpack.prod.conf.js  --colors",
     "lint": "eslint --ext .js,.ts src",
     "lint:lit-analyzer": "lit-analyzer",
-    "package:mac": "yarn clean:package && yarn build && electron-builder build --mac",
-    "package:linux": "yarn clean:package && yarn build && electron-builder build --linux",
-    "package:windows": "yarn clean:package && yarn build && electron-builder build --win --x64 --ia32",
-    "package": "yarn clean:package && yarn build && electron-builder build -mwl --x64 --ia32",
+    "package:mac": "yarn clean:package && yarn build && electron-builder build --mac --config electron-builder.config.json",
+    "package:linux": "yarn clean:package && yarn build && electron-builder build --linux --config electron-builder.config.json",
+    "package:windows": "yarn clean:package && yarn build && electron-builder build --win --x64 --ia32 --config electron-builder.config.json",
+    "package": "yarn clean:package && yarn build && electron-builder build -mwl --x64 --ia32 --config electron-builder.config.json",
     "clean:package": "rimraf ./build-packages",
     "analyze:web": "wca analyze \"src/**/*.ts\" --outFile wca-report.json",
     "first-release": "npx standard-version --commit-all --tag-prefix v --first-release --infile CHANGELOG.md",
     "release": "npx standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
-    "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts"
-  },
-  "build": {
-    "productName": "Tints and Shades",
-    "appId": "io.github.icelam.tintsandshades",
-    "extends": null,
-    "files": [
-      "dist/**/*",
-      "dist/utils/**/*",
-      "package.json"
-    ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "win": {
-      "target": [
-        "nsis",
-        "msi"
-      ]
-    },
-    "linux": {
-      "target": [
-        "deb",
-        "rpm",
-        "AppImage"
-      ],
-      "category": "Development"
-    },
-    "directories": {
-      "buildResources": "resources",
-      "output": "build-packages"
-    }
+    "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts",
+    "abi:electron": "electron -a",
+    "abi:node": "node -e \"console.log(process.versions.modules)\""
   },
   "browserslist": {
     "production": [

@@ -7,7 +7,7 @@ import { styleMap } from 'lit-html/directives/style-map';
  * Opens a color picker interface
  */
 @customElement('color-picker')
-class GeneratorApp extends LitElement {
+class ColorPicker extends LitElement {
   static get styles(): CSSResult {
     return css`
       :host {
@@ -53,8 +53,8 @@ class GeneratorApp extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'color-picker': GeneratorApp;
+    'color-picker': ColorPicker;
   }
 }
 
-export default GeneratorApp;
+export default ColorPicker;

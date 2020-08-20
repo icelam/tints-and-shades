@@ -27,3 +27,7 @@ export const APP_ICON_PATH = path.join(__dirname, './icon.png');
 
 export const GITHUB_REPO_URL = 'http://github.com/icelam/tints-and-shades';
 export const GITHUB_RELEASE_API = 'https://api.github.com/repos/icelam/tints-and-shades/releases/latest';
+
+export const MAIN_WINDOW_WIDTH = 396;
+export const MAIN_WINDOW_HEIGHT = 190;
+
