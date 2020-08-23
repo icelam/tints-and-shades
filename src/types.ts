@@ -13,3 +13,9 @@ export type PinStatusStorage = {
 export type AppThemeStorage = {
   theme?: AppThemeOptions;
 }
+
+export type RgbColor = {
+  red: number;
+  green: number;
+  blue: number;
+};

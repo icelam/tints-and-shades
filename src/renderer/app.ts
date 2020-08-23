@@ -3,6 +3,7 @@ import {
 } from 'lit-element';
 import '@components/Header/FrameHeader';
 import '@pages/TintsShadesGenerator';
+import { randomHexColor } from '@utils/color';
 
 /**
  * Enrty point of the app
@@ -53,6 +54,7 @@ class GeneratorApp extends LitElement {
       <tints-shades-generator
         .selectedColor=${this.selectedColor}
         .onColorPickerChange=${this.onColorPickerChange.bind(this)}
+        .onRandomizeColor=${this.onRandomizeColor.bind(this)}
       >
       </tints-shades-generator>
     `;
@@ -81,6 +83,10 @@ class GeneratorApp extends LitElement {
 
   private onColorPickerChange(event): void {
     this.selectedColor = event.target.value;
+  }
+
+  private onRandomizeColor(): void {
+    this.selectedColor = `#${randomHexColor()}`;
   }
 }
 

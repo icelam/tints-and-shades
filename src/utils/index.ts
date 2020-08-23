@@ -1,5 +1,6 @@
 export * from './appTheme';
 export { default as checkUpdates } from './checkUpdates';
+export * from './color';
 export { default as clearAppStorage } from './clearAppStorage';
 export { default as debounce } from './debounce';
 export * from './getThemes';

@@ -2,6 +2,7 @@ import {
   LitElement, html, css, CSSResult, customElement, TemplateResult, property
 } from 'lit-element';
 import '@components/Colors/ColorPicker';
+import '@components/Colors/ColorRandomize';
 
 /**
  * Wrapper of tints and shades generation UI
@@ -17,6 +18,7 @@ class TintsShadesGenerator extends LitElement {
 
       .color-input-set {
         display: flex;
+        align-items: center;
       }
 
       .color-input-set .color-picker {
@@ -28,7 +30,7 @@ class TintsShadesGenerator extends LitElement {
         padding: 0 0.6875rem;
       }
 
-      .color-input-set .color-dropper {
+      .color-input-set .color-randomize {
         flex: 0 1 20px;
       }
     `;
@@ -38,16 +40,22 @@ class TintsShadesGenerator extends LitElement {
 
   @property() onColorPickerChange?: (event: Event) => void;
 
+  @property() onRandomizeColor?: (event: Event) => void;
+
   render(): TemplateResult {
     return html`
       <div class="color-input-set">
         <color-picker class="color-picker"
           .selectedColor=${this.selectedColor}
-          .onColorPickerChange="${this.onColorPickerChange}"
+          .onColorPickerChange=${this.onColorPickerChange}
         >
         </color-picker>
-        <!--<color-input class="color-input"></color-input>
-        <color-dropper class="color-dropper"></color-dropper>-->
+        <div class="color-input"></div>
+        <color-randomize
+          class="color-randomize"
+          .onRandomizeColor=${this.onRandomizeColor}
+        >
+        </color-randomize>
       </div>
     `;
   }

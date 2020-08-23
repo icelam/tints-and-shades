@@ -37,6 +37,7 @@
   --color-frame-header-icon: var(--color-grey-54);
   --color-frame-header-icon-hover: var(--color-grey-40);
   --color-inout-border: var(--color-grey-91);
+  --color-body-icon: var(--color-grey-54);
 }
 
 [data-theme^='dark'] {
@@ -51,4 +52,5 @@
   --color-frame-header-icon: var(--color-grey-46);
   --color-frame-header-icon-hover: var(--color-grey-60);
   --color-inout-border: var(--color-grey-28);
+  --color-body-icon: var(--color-grey-40);
 }
