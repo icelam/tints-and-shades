@@ -86,7 +86,7 @@ class GeneratorApp extends LitElement {
   }
 
   private onRandomizeColor(): void {
-    this.selectedColor = `#${randomHexColor()}`;
+    this.selectedColor = randomHexColor() ?? this.selectedColor;
   }
 }
 

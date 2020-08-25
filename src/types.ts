@@ -19,3 +19,10 @@ export type RgbColor = {
   green: number;
   blue: number;
 };
+
+export type TintsOrShadesMode = 'tints' | 'shades';
+
+export type TintsOrShadesItem = {
+    hex: string;
+    rgb: RgbColor;
+};

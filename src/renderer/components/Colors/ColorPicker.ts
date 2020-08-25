@@ -15,10 +15,11 @@ class ColorPicker extends LitElement {
       }
 
       label {
-        border: 1px solid var(--color-inout-border);
+        border: 1px solid var(--color-input-border);
         border-radius: 0.3125rem;
         height: 2.5rem;
         display: block;
+        box-sizing: border-box;
       }
 
       input[type="color"] {

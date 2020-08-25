@@ -36,8 +36,11 @@
   --color-frame-header-text: var(--color-grey-54);
   --color-frame-header-icon: var(--color-grey-54);
   --color-frame-header-icon-hover: var(--color-grey-40);
-  --color-inout-border: var(--color-grey-91);
+  --color-input-border: var(--color-grey-91);
   --color-body-icon: var(--color-grey-54);
+  --color-tooltip-background: var(--color-grey-40);
+  --color-tooltip-text: var(--color-white);
+  --color-color-steps-border: var(--color-grey-91);
 }
 
 [data-theme^='dark'] {
@@ -51,6 +54,9 @@
   --color-frame-header-text: var(--color-grey-46);
   --color-frame-header-icon: var(--color-grey-46);
   --color-frame-header-icon-hover: var(--color-grey-60);
-  --color-inout-border: var(--color-grey-28);
+  --color-input-border: var(--color-grey-28);
   --color-body-icon: var(--color-grey-40);
+  --color-tooltip-background: var(--color-grey-28);
+  --color-tooltip-text: var(--color-white);
+  --color-color-steps-border: var(--color-grey-28);
 }
