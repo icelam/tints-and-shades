@@ -31,7 +31,6 @@
     "electron-builder": "^22.8.0",
     "electron-json-storage": "^4.2.0",
     "electron-log": "^4.2.2",
-    "electron-rebuild": "^1.11.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
