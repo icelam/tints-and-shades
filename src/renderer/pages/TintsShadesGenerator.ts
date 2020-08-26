@@ -48,6 +48,8 @@ class TintsShadesGenerator extends LitElement {
 
   @property() onRandomizeColor?: (event: Event) => void;
 
+  @property() copyColorToClipboard?: (event: MouseEvent) => void;
+
   render(): TemplateResult {
     return html`
       <div class="color-input-set">
@@ -64,11 +66,13 @@ class TintsShadesGenerator extends LitElement {
       </div>
       <color-steps
         .selectedColor=${this.selectedColor}
+        .copyColorToClipboard=${this.copyColorToClipboard}
         mode="shades"
       >
       </color-steps>
       <color-steps
         .selectedColor=${this.selectedColor}
+        .copyColorToClipboard=${this.copyColorToClipboard}
         mode="tints"
       >
       </color-steps>

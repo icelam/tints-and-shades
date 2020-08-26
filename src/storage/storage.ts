@@ -125,7 +125,7 @@ export const saveWindowPinStatus = (isWindowPinned?: boolean): void => {
 };
 
 /**
- * Get selectedColor stored in storage
+ * Get selected color stored in storage
  * @returns {SelectedColorStorage} JSON that contains user's last selected color
  */
 export const getSelectedColor = async (): Promise<SelectedColorStorage> => {
@@ -140,7 +140,7 @@ export const getSelectedColor = async (): Promise<SelectedColorStorage> => {
     });
     return selectedColor as SelectedColorStorage;
   } catch (error) {
-    log.error(error?.message ?? 'Unknown error from getPinStatus()');
+    log.error(error?.message ?? 'Unknown error from getSelectedColor()');
     return {};
   }
 };

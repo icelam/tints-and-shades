@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as url from 'url';
 import {
-  app, BrowserWindow, Menu, ipcMain, nativeTheme
+  app, BrowserWindow, Menu, ipcMain, nativeTheme, clipboard
 } from 'electron';
 import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
 import {
@@ -125,6 +125,10 @@ ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: Position) => {
 
 ipcMain.on('SAVE_SELECTED_COLOR', (_, value: string) => {
   saveSelectedColor(value);
+});
+
+ipcMain.on('COPY_COLOR_TO_CLIPBOARD', (_, value: string) => {
+  clipboard.writeText(value);
 });
 
 // Export mainWindow for other file which requies BrowserWindow to work

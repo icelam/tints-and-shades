@@ -14,6 +14,7 @@
   --color-grey-91: #e7e7e7;
   --color-grey-67: #aaaaaa;
   --color-grey-54: #8a8a8a;
+  --color-light-shadow: rgba(0, 0, 0, 0.2);
 
   /* Dark mode */
   --color-grey-18: #2d2d2d;
@@ -22,6 +23,7 @@
   --color-grey-46: #747474;
   --color-grey-60: #999999;
   --color-grey-68: #afafaf;
+  --color-dark-shadow: rgba(0, 0, 0, 0.5);
 }
 
 :root,
@@ -41,6 +43,9 @@
   --color-tooltip-background: var(--color-grey-40);
   --color-tooltip-text: var(--color-white);
   --color-color-steps-border: var(--color-grey-91);
+  --color-copy-button-background: var(--color-white);
+  --color-copy-button-text: var(--color-grey-54);
+  --color-copy-button-shadow: var(--color-light-shadow);
 }
 
 [data-theme^='dark'] {
@@ -57,6 +62,9 @@
   --color-input-border: var(--color-grey-28);
   --color-body-icon: var(--color-grey-40);
   --color-tooltip-background: var(--color-grey-28);
-  --color-tooltip-text: var(--color-white);
+  --color-tooltip-text: var(--color-grey-68);
   --color-color-steps-border: var(--color-grey-28);
+  --color-copy-button-background: var(--color-grey-28);
+  --color-copy-button-text: var(--color-grey-54);
+  --color-copy-button-shadow: var(--color-dark-shadow);
 }

@@ -32,6 +32,11 @@ const commonButtonStyles = css`
     top: 0px;
     left: 0px;
   }
+
+  /* Prevent event firing from child svg */
+  .button > svg {
+    pointer-events: none;
+  }
 `;
 
 export default commonButtonStyles;

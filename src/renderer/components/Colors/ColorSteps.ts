@@ -1,7 +1,10 @@
 import {
-  LitElement, html, css, CSSResult, property, customElement, TemplateResult
+  LitElement, html, css, CSSResult, property, customElement, TemplateResult, svg
 } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import copyIcon from '@images/icons/copy.svg';
+import commonButtonStyles from '@components/Button/button.styles';
 import commonTooltipStyles from '@components/Tooltip/tooltip.styles';
 import { generateTintsOrShades } from '@utils/color';
 import { TintsOrShadesMode } from '@types';
@@ -13,6 +16,7 @@ import { TintsOrShadesMode } from '@types';
 class ColorSteps extends LitElement {
   static get styles(): CSSResult[] {
     return [
+      commonButtonStyles,
       commonTooltipStyles,
       css`
       :host {
@@ -27,6 +31,9 @@ class ColorSteps extends LitElement {
         border-color: var(--color-color-steps-border);
         border-style: solid;
         border-width: 1px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .color-steps__step:first-child {
@@ -40,6 +47,29 @@ class ColorSteps extends LitElement {
         border-bottom-right-radius: 0.25em;
         border-width: 1px 1px 1px 0;
       }
+
+      .color-steps__step .copy-button {
+        box-shadow: 0 1px 2px var(--color-copy-button-shadow);
+        background-color: var(--color-copy-button-background);
+        color: var(--color-copy-button-text);
+        height: 1.25rem;
+        width: 1.25rem;
+        border-radius: 0.125rem;
+        padding: 0.25rem;
+        line-height: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.1s linear;
+      }
+
+      .color-steps__step .copy-button > svg {
+        fill: var(--color-copy-button-text);
+        height: 0.75rem;
+        width: auto;
+      }
+
+      .color-steps__step:hover .copy-button {
+        opacity: 1;
+      }
     `
     ];
   }
@@ -48,9 +78,11 @@ class ColorSteps extends LitElement {
 
   @property({ type: String }) selectedColor = '';
 
+  @property() copyColorToClipboard?: (event: MouseEvent) => void;
+
   render(): TemplateResult {
     const colorSteps = generateTintsOrShades(this.selectedColor, this.mode);
-    // TODO: Copy color to clipbpard, allow select copy mode
+    // TODO: respect setting of copy format by changing button value
     return html`
       ${colorSteps.map((color) => html`
         <div
@@ -59,7 +91,15 @@ class ColorSteps extends LitElement {
             'background-color': color.hex
           })}
           data-tooltip="${color.hex.replace('#', '')}"
-        ></div>
+        >
+          <button
+            class="button copy-button"
+            @click=${this.copyColorToClipboard}
+            value="${color.hex}"
+          >
+            ${svg`${unsafeHTML(copyIcon)}`}
+          </button>
+        </div>
       `)}
     `;
   }

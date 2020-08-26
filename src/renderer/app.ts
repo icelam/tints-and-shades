@@ -54,6 +54,7 @@ class GeneratorApp extends LitElement {
         .selectedColor=${this.selectedColor}
         .onColorPickerChange=${this.onColorPickerChange.bind(this)}
         .onRandomizeColor=${this.onRandomizeColor.bind(this)}
+        .copyColorToClipboard=${this.copyColorToClipboard}
       >
       </tints-shades-generator>
     `;
@@ -80,8 +81,8 @@ class GeneratorApp extends LitElement {
     window.ipcRenderer.send('PIN_APP', newPinState);
   }
 
-  private onColorPickerChange(event): void {
-    const newColor = event.target.value;
+  private onColorPickerChange(event: Event): void {
+    const newColor = (event.target as HTMLInputElement).value;
     this.selectedColor = newColor;
     window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
   }
@@ -90,6 +91,13 @@ class GeneratorApp extends LitElement {
     const newColor = randomHexColor() ?? this.selectedColor;
     this.selectedColor = newColor;
     window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
+  }
+
+  private copyColorToClipboard(event: MouseEvent): void {
+    const colorToCopy = (event?.target as HTMLButtonElement)?.value;
+    if (colorToCopy) {
+      window.ipcRenderer.send('COPY_COLOR_TO_CLIPBOARD', colorToCopy);
+    }
   }
 }
 
