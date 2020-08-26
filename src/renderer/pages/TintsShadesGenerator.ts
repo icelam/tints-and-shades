@@ -23,7 +23,7 @@ class TintsShadesGenerator extends LitElement {
         margin-bottom: 1rem;
       }
 
-      .color-input-set .color-picker {
+      .color-input-set color-picker {
         flex: 0 1 20%;
       }
 
@@ -32,11 +32,11 @@ class TintsShadesGenerator extends LitElement {
         padding: 0 0.6875rem;
       }
 
-      .color-input-set .color-randomize {
+      .color-input-set color-randomize {
         flex: 0 1 20px;
       }
 
-      .color-steps {
+      color-steps {
         margin-top: 0.5rem;
       }
     `;
@@ -51,26 +51,23 @@ class TintsShadesGenerator extends LitElement {
   render(): TemplateResult {
     return html`
       <div class="color-input-set">
-        <color-picker class="color-picker"
+        <color-picker
           .selectedColor=${this.selectedColor}
           .onColorPickerChange=${this.onColorPickerChange}
         >
         </color-picker>
         <div class="color-input"></div>
         <color-randomize
-          class="color-randomize"
           .onRandomizeColor=${this.onRandomizeColor}
         >
         </color-randomize>
       </div>
       <color-steps
-        class="color-steps"
         .selectedColor=${this.selectedColor}
         mode="shades"
       >
       </color-steps>
       <color-steps
-        class="color-steps"
         .selectedColor=${this.selectedColor}
         mode="tints"
       >

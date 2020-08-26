@@ -1,12 +1,13 @@
 import * as storage from 'electron-json-storage';
 import log from 'electron-log';
 import {
-  Position, AppThemeOptions, AppThemeStorage, PinStatusStorage
+  Position, AppThemeOptions, AppThemeStorage, PinStatusStorage, SelectedColorStorage
 } from '@types';
 
 const WINDOW_POSITION_STORAGE_PATH = 'windowPosition';
 const THEME_STORAGE_PATH = 'appTheme';
 const WINDOW_PIN_STATUS_STORAGE_PATH = 'windowPinStatus';
+const WINDOW_SELECTED_COLOR_STORAGE_PATH = 'selectedColor';
 
 /**
  * Get user defined theme preference stored in storage
@@ -120,6 +121,46 @@ export const saveWindowPinStatus = (isWindowPinned?: boolean): void => {
     });
   } catch (error) {
     log.error(error?.message ?? 'Unknown error from savePinStatus()');
+  }
+};
+
+/**
+ * Get selectedColor stored in storage
+ * @returns {SelectedColorStorage} JSON that contains user's last selected color
+ */
+export const getSelectedColor = async (): Promise<SelectedColorStorage> => {
+  try {
+    const selectedColor = await new Promise((resolve, reject) => {
+      storage.get(WINDOW_SELECTED_COLOR_STORAGE_PATH, (
+        error: Error, data: SelectedColorStorage
+      ) => {
+        if (error) { reject(error); }
+        resolve(data);
+      });
+    });
+    return selectedColor as SelectedColorStorage;
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from getPinStatus()');
+    return {};
+  }
+};
+
+/**
+ * Save selected color to storage
+ * @param {string} user selected color
+ */
+export const saveSelectedColor = (color?: string): void => {
+  try {
+    if (typeof color !== 'string') {
+      throw new Error('Color is not defined when trying to save selected color');
+    }
+
+    const selectedColorData: SelectedColorStorage = { selectedColor: color };
+    storage.set(WINDOW_SELECTED_COLOR_STORAGE_PATH, selectedColorData, (error) => {
+      if (error) { throw error; }
+    });
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from saveSelectedColor()');
   }
 };
 

@@ -10,6 +10,10 @@ export type PinStatusStorage = {
   isPinned?: boolean;
 };
 
+export type SelectedColorStorage = {
+  selectedColor?: string;
+};
+
 export type AppThemeStorage = {
   theme?: AppThemeOptions;
 }

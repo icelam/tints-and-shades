@@ -38,7 +38,6 @@ class GeneratorApp extends LitElement {
   /**
    * Current selectedColor from user
    */
-  // TODO: Save and restore selected color from storage
   @property({ type: String }) selectedColor = '#46beb9';
 
   render(): TemplateResult {
@@ -82,11 +81,15 @@ class GeneratorApp extends LitElement {
   }
 
   private onColorPickerChange(event): void {
-    this.selectedColor = event.target.value;
+    const newColor = event.target.value;
+    this.selectedColor = newColor;
+    window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
   }
 
   private onRandomizeColor(): void {
-    this.selectedColor = randomHexColor() ?? this.selectedColor;
+    const newColor = randomHexColor() ?? this.selectedColor;
+    this.selectedColor = newColor;
+    window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
   }
 }
 

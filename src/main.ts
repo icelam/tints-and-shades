@@ -5,7 +5,7 @@ import {
 } from 'electron';
 import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
 import {
-  getWindowLocation, saveWindowPosition, getWindowPinStatus, saveWindowPinStatus
+  getWindowLocation, saveWindowPosition, getWindowPinStatus, saveWindowPinStatus, saveSelectedColor
 } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import {
@@ -121,6 +121,10 @@ ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: Position) => {
     x: mousePosition.x,
     y: mousePosition.y
   });
+});
+
+ipcMain.on('SAVE_SELECTED_COLOR', (_, value: string) => {
+  saveSelectedColor(value);
 });
 
 // Export mainWindow for other file which requies BrowserWindow to work
