@@ -5,7 +5,12 @@ import {
 } from 'electron';
 import { debounce, listenToSystemThemeChange, getUserPreferedTheme } from '@utils';
 import {
-  getWindowLocation, saveWindowPosition, getWindowPinStatus, saveWindowPinStatus, saveSelectedColor
+  getWindowLocation,
+  saveWindowPosition,
+  getWindowPinStatus,
+  saveWindowPinStatus,
+  saveSelectedColor,
+  saveColorInputMode
 } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import {
@@ -16,7 +21,7 @@ import {
   MAIN_WINDOW_WIDTH,
   MAIN_WINDOW_HEIGHT
 } from '@constants';
-import { Position, AppThemeOptions } from '@types';
+import { Position, AppThemeOptions, ColorInputMode } from '@types';
 
 let mainWindow: BrowserWindow;
 
@@ -125,6 +130,10 @@ ipcMain.on('OPEN_SETTING_MENU', (_, mousePosition: Position) => {
 
 ipcMain.on('SAVE_SELECTED_COLOR', (_, value: string) => {
   saveSelectedColor(value);
+});
+
+ipcMain.on('SAVE_COLOR_INPUT_MODE', (_, value: ColorInputMode) => {
+  saveColorInputMode(value);
 });
 
 ipcMain.on('COPY_COLOR_TO_CLIPBOARD', (_, value: string) => {

@@ -14,18 +14,22 @@ class ColorRandomize extends LitElement {
     return [
       commonButtonStyles,
       css`
-      :host {
-        display: block;
-      }
+        :host {
+          display: block;
+        }
 
-      .icon-button svg {
-        height: 1.25rem;
-        width: 1.25rem;
-        fill: var(--color-body-icon);
-        display: block;
-        transition: fill 0.1s linear;
-      }
-    `
+        .icon-button svg {
+          height: 1.25rem;
+          width: 1.25rem;
+          fill: var(--color-body-icon);
+          display: block;
+          transition: fill 0.1s linear;
+        }
+
+        .icon-button:hover svg {
+          fill: var(--color-body-icon-hover);
+        }
+      `
     ];
   }
 

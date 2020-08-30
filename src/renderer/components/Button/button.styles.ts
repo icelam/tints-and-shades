@@ -1,7 +1,7 @@
 import { css } from 'lit-element';
 
 /**
- * Shared styles for buttons.
+ * Shared styles for buttons
  */
 const commonButtonStyles = css`
   .button {

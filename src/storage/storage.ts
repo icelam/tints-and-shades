@@ -1,13 +1,20 @@
 import * as storage from 'electron-json-storage';
 import log from 'electron-log';
 import {
-  Position, AppThemeOptions, AppThemeStorage, PinStatusStorage, SelectedColorStorage
+  Position,
+  AppThemeOptions,
+  AppThemeStorage,
+  PinStatusStorage,
+  SelectedColorStorage,
+  ColorInputModeStorage,
+  ColorInputMode
 } from '@types';
 
 const WINDOW_POSITION_STORAGE_PATH = 'windowPosition';
 const THEME_STORAGE_PATH = 'appTheme';
 const WINDOW_PIN_STATUS_STORAGE_PATH = 'windowPinStatus';
 const WINDOW_SELECTED_COLOR_STORAGE_PATH = 'selectedColor';
+const WINDOW_COLOR_INPUT_MODE_STORAGE_PATH = 'colorInputMode';
 
 /**
  * Get user defined theme preference stored in storage
@@ -161,6 +168,46 @@ export const saveSelectedColor = (color?: string): void => {
     });
   } catch (error) {
     log.error(error?.message ?? 'Unknown error from saveSelectedColor()');
+  }
+};
+
+/**
+ * Get color input mode stored in storage
+ * @returns {ColorInputModeStorage} JSON that contains user's last selected color input mode
+ */
+export const getColorInputMode = async (): Promise<ColorInputModeStorage> => {
+  try {
+    const colorInputMode = await new Promise((resolve, reject) => {
+      storage.get(WINDOW_COLOR_INPUT_MODE_STORAGE_PATH, (
+        error: Error, data: ColorInputModeStorage
+      ) => {
+        if (error) { reject(error); }
+        resolve(data);
+      });
+    });
+    return colorInputMode as ColorInputModeStorage;
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from getColorInputMode()');
+    return {};
+  }
+};
+
+/**
+ * Save selected color input mode to storage
+ * @param {ColorInputMode} user selected color input mode
+ */
+export const saveColorInputMode = (mode?: ColorInputMode): void => {
+  try {
+    if (typeof mode !== 'string') {
+      throw new Error('Mode is not defined when trying to save selected color');
+    }
+
+    const colorInputMode: ColorInputModeStorage = { inputMode: mode };
+    storage.set(WINDOW_COLOR_INPUT_MODE_STORAGE_PATH, colorInputMode, (error) => {
+      if (error) { throw error; }
+    });
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from saveColorInputMode()');
   }
 };
 

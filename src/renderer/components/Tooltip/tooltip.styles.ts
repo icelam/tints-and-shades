@@ -1,7 +1,7 @@
 import { css } from 'lit-element';
 
 /**
- * Shared styles for buttons.
+ * Shared styles for tooltips
  */
 const commonTooltipStyles = css`
   [data-tooltip] {

@@ -40,12 +40,22 @@
   --color-frame-header-icon-hover: var(--color-grey-40);
   --color-input-border: var(--color-grey-91);
   --color-body-icon: var(--color-grey-54);
+  --color-body-icon-hover: var(--color-grey-40);
   --color-tooltip-background: var(--color-grey-40);
   --color-tooltip-text: var(--color-white);
   --color-color-steps-border: var(--color-grey-91);
   --color-copy-button-background: var(--color-white);
   --color-copy-button-text: var(--color-grey-54);
   --color-copy-button-shadow: var(--color-light-shadow);
+  --color-input-background: var(--color-white);
+  --color-input-text: var(--color-grey-40);
+  --color-input-placeholder: var(--color-grey-67);
+  --color-input-border: var(--color-grey-91);
+  --color-input-border-error: var(--color-light-red);
+  --color-input-label-background: var(--color-grey-96);
+  --color-input-label-text: var(--color-grey-40);
+  --color-input-mode-icon: var(--color-grey-67);
+  --color-input-mode-icon-hover: var(--color-grey-54);
 }
 
 [data-theme^='dark'] {
@@ -61,10 +71,20 @@
   --color-frame-header-icon-hover: var(--color-grey-60);
   --color-input-border: var(--color-grey-28);
   --color-body-icon: var(--color-grey-40);
+  --color-body-icon-hover: var(--color-grey-60);
   --color-tooltip-background: var(--color-grey-28);
   --color-tooltip-text: var(--color-grey-68);
   --color-color-steps-border: var(--color-grey-28);
   --color-copy-button-background: var(--color-grey-28);
   --color-copy-button-text: var(--color-grey-54);
   --color-copy-button-shadow: var(--color-dark-shadow);
+  --color-input-background: var(--color--grey-18);
+  --color-input-text: var(--color-grey-68);
+  --color-input-placeholder: var(--color-grey-28);
+  --color-input-border: var(--color-grey-28);
+  --color-input-border-error: var(--color-light-red);
+  --color-input-label-background: var(--color-grey-23);
+  --color-input-label-text: var(--color-grey-68);
+  --color-input-mode-icon: var(--color-grey-40);
+  --color-input-mode-icon-hover: var(--color-grey-60);
 }

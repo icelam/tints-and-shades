@@ -1,10 +1,30 @@
 import { RgbColor, TintsOrShadesItem, TintsOrShadesMode } from '@types';
 
+const VALID_HEX_COLOR_REGEX = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+const VALID_RGB_COLOR_REGEX = /^(\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})$/;
+
+export const isValidHexColor = (value: string): boolean => VALID_HEX_COLOR_REGEX.test(value);
+
+export const isValidRgbColor = (value: string): boolean => {
+  const rgbParts = VALID_RGB_COLOR_REGEX.exec(value.toLowerCase());
+
+  if (!rgbParts) {
+    return false;
+  }
+
+  const red = parseInt(rgbParts[1], 10);
+  const green = parseInt(rgbParts[2], 10);
+  const blue = parseInt(rgbParts[3], 10);
+
+  return (red >= 0 && red <= 255)
+    && (green >= 0 && green <= 255)
+    && (blue >= 0 && blue <= 255);
+};
+
 const randomRgbNumber = (): number => Math.floor(Math.random() * 256); // 0 - 255
 
-export const colorHexToRgb = (color: string): RgbColor | null => {
-  const re = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
-  const hexParts = re.exec(color.toLowerCase());
+export const convertColorHexToRgb = (color: string): RgbColor | null => {
+  const hexParts = VALID_HEX_COLOR_REGEX.exec(color.toLowerCase());
 
   if (!hexParts) {
     return null;
@@ -19,11 +39,17 @@ export const colorHexToRgb = (color: string): RgbColor | null => {
   };
 };
 
-export const colorRgbToHex = (color: string | RgbColor): string | null => {
+export const convertColorHexToRgbString = (color: string): string => {
+  const rgbObject = convertColorHexToRgb(color);
+  return rgbObject
+    ? `${rgbObject.red}, ${rgbObject.green}, ${rgbObject.blue}`
+    : '';
+};
+
+export const convertColorRgbToHex = (color: string | RgbColor): string | null => {
   let colorParts: number[] = [];
   if (typeof color === 'string') {
-    const re = /^(\d{1,3}),\s?(\d{1,3}),\s?(\d{1,3})$/;
-    const rgbParts = re.exec(color);
+    const rgbParts = VALID_RGB_COLOR_REGEX.exec(color);
 
     if (!rgbParts) {
       return null;
@@ -55,7 +81,7 @@ export const randomHexColor = (): string | null => {
     blue: randomRgbNumber()
   };
 
-  return colorRgbToHex(randomRgbNumbers);
+  return convertColorRgbToHex(randomRgbNumbers);
 };
 
 const calculateTints = (
@@ -71,7 +97,7 @@ export const generateTintsOrShades = (
   color: string,
   mode: TintsOrShadesMode
 ): TintsOrShadesItem[] => {
-  const rgb = colorHexToRgb(color);
+  const rgb = convertColorHexToRgb(color);
 
   if (!rgb) {
     return [];
@@ -89,7 +115,7 @@ export const generateTintsOrShades = (
       green: calculateNewValue(rgb.green, i),
       blue: calculateNewValue(rgb.blue, i)
     };
-    const nexStepHex = colorRgbToHex(nextStepRgb) ?? '';
+    const nexStepHex = convertColorRgbToHex(nextStepRgb) ?? '';
 
     result.push({
       hex: nexStepHex,

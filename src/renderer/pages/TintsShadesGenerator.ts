@@ -2,8 +2,10 @@ import {
   LitElement, html, css, CSSResult, customElement, TemplateResult, property
 } from 'lit-element';
 import '@components/Colors/ColorPicker';
+import '@components/Colors/ColorInput';
 import '@components/Colors/ColorRandomize';
 import '@components/Colors/ColorSteps';
+import { ColorInputMode } from '@types';
 
 /**
  * Wrapper of tints and shades generation UI
@@ -24,16 +26,16 @@ class TintsShadesGenerator extends LitElement {
       }
 
       .color-input-set color-picker {
-        flex: 0 1 20%;
+        flex: 1 0 20%;
       }
 
-      .color-input-set .color-input {
-        flex: 1 0 auto;
+      .color-input-set color-input {
+        flex: 0 1 auto;
         padding: 0 0.6875rem;
       }
 
       .color-input-set color-randomize {
-        flex: 0 1 20px;
+        flex: 1 0 20px;
       }
 
       color-steps {
@@ -44,11 +46,23 @@ class TintsShadesGenerator extends LitElement {
 
   @property({ type: String }) selectedColor = '';
 
+  @property({ type: String }) colorInputValue = '';
+
   @property() onColorPickerChange?: (event: Event) => void;
 
   @property() onRandomizeColor?: (event: Event) => void;
 
   @property() copyColorToClipboard?: (event: MouseEvent) => void;
+
+  @property() colorInputMode: ColorInputMode = 'hex';
+
+  @property() onColorInputChange?: (value: string) => void;
+
+  @property() onColorInputModeClick?: () => void;
+
+  @property() onColorInputKeypress?: (event: KeyboardEvent) => void;
+
+  @property({ type: Boolean }) colorInputHasError = false;
 
   render(): TemplateResult {
     return html`
@@ -58,7 +72,15 @@ class TintsShadesGenerator extends LitElement {
           .onColorPickerChange=${this.onColorPickerChange}
         >
         </color-picker>
-        <div class="color-input"></div>
+        <color-input
+          .colorInputValue=${this.colorInputValue}
+          .colorInputMode=${this.colorInputMode}
+          .onColorInputChange=${this.onColorInputChange}
+          .onColorInputModeClick=${this.onColorInputModeClick}
+          .onColorInputKeypress=${this.onColorInputKeypress}
+          .colorInputHasError=${this.colorInputHasError}
+        >
+        </color-input>
         <color-randomize
           .onRandomizeColor=${this.onRandomizeColor}
         >

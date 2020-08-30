@@ -18,6 +18,12 @@ export type AppThemeStorage = {
   theme?: AppThemeOptions;
 }
 
+export type ColorInputMode = 'hex' | 'rgb';
+
+export type ColorInputModeStorage = {
+  inputMode?: ColorInputMode;
+}
+
 export type RgbColor = {
   red: number;
   green: number;
@@ -30,3 +36,4 @@ export type TintsOrShadesItem = {
     hex: string;
     rgb: RgbColor;
 };
+
