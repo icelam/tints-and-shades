@@ -1,6 +1,7 @@
 {
   "name": "tints-and-shades",
   "version": "0.1.0",
+  "license": "MIT",
   "author": "Ice Lam <6780420+icelam@users.noreply.github.com>",
   "homepage": "./",
   "description": "Tints and Shades - Built with Electron and LitElement.",
