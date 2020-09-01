@@ -7,7 +7,7 @@ on:
 jobs:
   release:
     name: Create release
-    runs-on: ubuntu-latest
+    runs-on: macos-10.14
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
@@ -19,6 +19,8 @@ jobs:
       # ----------------------------------------#
       #                  Build                  #
       # ----------------------------------------#
+      - name: Install rpm need for electron builder
+        run: brew install rpm
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -35,7 +37,7 @@ jobs:
           yarn install --frozen-lockfile
       - name: Build Tints and Shades packages
         run: |
-          yarn package
+          ELECTRON_BUILDER_CACHE=./electron-builder-cache yarn package
       - name: Generate release body
         # https://github.com/conventional-changelog/standard-version/issues/568#issuecomment-611202153
         run: |
