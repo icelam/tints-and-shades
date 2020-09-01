@@ -7,7 +7,7 @@ import {
   getCopyFormat
 } from '@storage';
 import { AppTheme } from '@types';
-import { convertColorHexToRgbString } from '@utils/color';
+import { convertColorHexToRgbString, removeHashFromHexColor } from '@utils/color';
 
 // nodeIntegration is set to `false` for security reasons
 // Inject functions needed for web contents here
@@ -47,7 +47,7 @@ const restoreSelectedColorAndInputMode = async (): Promise<void> => {
     if (inputMode === 'rgb') {
       inputValue = convertColorHexToRgbString(selectedColor);
     } else {
-      inputValue = selectedColor.replace('#', '');
+      inputValue = removeHashFromHexColor(selectedColor);
     }
 
     inputValue && window.document.getElementById('app')?.setAttribute('colorInputValue', inputValue);

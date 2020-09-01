@@ -132,3 +132,5 @@ export const generateTintsOrShades = (
 
   return result;
 };
+
+export const removeHashFromHexColor = (color: string): string => color.replace('#', '');

@@ -8,7 +8,8 @@ import {
   isValidHexColor,
   isValidRgbColor,
   convertColorRgbToHex,
-  convertColorHexToRgbString
+  convertColorHexToRgbString,
+  removeHashFromHexColor
 } from '@utils/color';
 import debounce from '@utils/debounce';
 import { ColorInputMode, CopyFormat } from '@types';
@@ -140,7 +141,7 @@ class GeneratorApp extends LitElement {
     if (this.colorInputMode === 'rgb') {
       inputValue = convertColorHexToRgbString(newColor);
     } else {
-      inputValue = newColor.replace('#', '');
+      inputValue = removeHashFromHexColor(newColor);
     }
 
     this.colorInputValue = inputValue;
@@ -206,7 +207,7 @@ class GeneratorApp extends LitElement {
       this.colorInputValue = convertColorHexToRgbString(this.colorInputValue);
     } else {
       const hexValue = convertColorRgbToHex(this.colorInputValue) as string;
-      this.colorInputValue = hexValue.replace('#', ''); // TODO: make a reusable utils for removing #
+      this.colorInputValue = removeHashFromHexColor(hexValue);
     }
 
     window.ipcRenderer.send('SAVE_COLOR_INPUT_MODE', newColorInputMode);

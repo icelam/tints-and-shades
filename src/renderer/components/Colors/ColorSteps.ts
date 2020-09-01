@@ -6,7 +6,7 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import copyIcon from '@images/icons/copy.svg';
 import commonButtonStyles from '@components/Button/button.styles';
 import commonTooltipStyles from '@components/Tooltip/tooltip.styles';
-import { generateTintsOrShades } from '@utils/color';
+import { generateTintsOrShades, removeHashFromHexColor } from '@utils/color';
 import { TintsOrShadesMode, CopyFormat, ColorInputMode } from '@types';
 
 /**
@@ -95,7 +95,7 @@ class ColorSteps extends LitElement {
           style=${styleMap({
             'background-color': color.hex
           })}
-          data-tooltip="${color.hex.replace('#', '')}"
+          data-tooltip="${removeHashFromHexColor(color.hex)}"
         >
           <button
             class="button copy-button"
