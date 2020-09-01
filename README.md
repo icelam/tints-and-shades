@@ -3,7 +3,7 @@
 ![Tints and Shades](./docs/key-visual-light.png)
 
 <p align="center">
-    A tints and shades built using Electron and LitElement.
+    A tints and shades generator built using Electron and LitElement.
 </p>
 
 <p align="center">
