@@ -5,7 +5,7 @@ import '@components/Colors/ColorPicker';
 import '@components/Colors/ColorInput';
 import '@components/Colors/ColorRandomize';
 import '@components/Colors/ColorSteps';
-import { ColorInputMode } from '@types';
+import { ColorInputMode, CopyFormat } from '@types';
 
 /**
  * Wrapper of tints and shades generation UI
@@ -43,6 +43,8 @@ class TintsShadesGenerator extends LitElement {
       }
     `;
   }
+
+  @property() copyFormat: CopyFormat = 'hex';
 
   @property({ type: String }) selectedColor = '';
 
@@ -87,12 +89,16 @@ class TintsShadesGenerator extends LitElement {
         </color-randomize>
       </div>
       <color-steps
+        .copyFormat=${this.copyFormat}
+        .colorInputMode=${this.colorInputMode}
         .selectedColor=${this.selectedColor}
         .copyColorToClipboard=${this.copyColorToClipboard}
         mode="shades"
       >
       </color-steps>
       <color-steps
+        .copyFormat=${this.copyFormat}
+        .colorInputMode=${this.colorInputMode}
         .selectedColor=${this.selectedColor}
         .copyColorToClipboard=${this.copyColorToClipboard}
         mode="tints"

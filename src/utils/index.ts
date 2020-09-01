@@ -2,6 +2,7 @@ export * from './appTheme';
 export { default as checkUpdates } from './checkUpdates';
 export * from './color';
 export { default as clearAppStorage } from './clearAppStorage';
+export { default as setCopyFormat } from './copyFormat';
 export { default as debounce } from './debounce';
 export * from './getThemes';
 export { default as openIssuePage } from './openIssuePage';

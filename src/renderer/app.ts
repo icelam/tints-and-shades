@@ -11,7 +11,7 @@ import {
   convertColorHexToRgbString
 } from '@utils/color';
 import debounce from '@utils/debounce';
-import { ColorInputMode } from '@types';
+import { ColorInputMode, CopyFormat } from '@types';
 
 /**
  * Enrty point of the app
@@ -44,6 +44,11 @@ class GeneratorApp extends LitElement {
   shouldPinFrame = false;
 
   /**
+   * Current copy format defined by user setting
+   */
+  @property() copyFormat: CopyFormat = 'input';
+
+  /**
    * Current color selected by user
    */
   @property({ type: String }) selectedColor = '#46beb9';
@@ -56,7 +61,7 @@ class GeneratorApp extends LitElement {
   /**
    * Current input mode of color input text box
    */
-  @property({ type: String }) colorInputMode: ColorInputMode = 'hex';
+  @property() colorInputMode: ColorInputMode = 'hex';
 
   /**
    * Indicates if value of color input text box has error
@@ -74,6 +79,7 @@ class GeneratorApp extends LitElement {
       >
       </frame-header>
       <tints-shades-generator
+        .copyFormat=${this.copyFormat}
         .selectedColor=${this.selectedColor}
         .colorInputValue=${this.colorInputValue}
         .onColorPickerChange=${this.onColorPickerChange.bind(this)}

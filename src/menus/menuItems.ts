@@ -6,7 +6,8 @@ import {
   checkUpdates,
   clearAppStorage,
   openStorageFolder,
-  setAppTheme
+  setAppTheme,
+  setCopyFormat
 } from '@utils';
 
 /**
@@ -18,18 +19,26 @@ export const copyFormatMenuItem: MenuItemConstructorOptions = {
     {
       label: translations.menus.copyAsHex,
       type: 'radio',
-      checked: true
-      // TODO: Set copy as HEX, share value between setting menu and app menu
+      id: 'copy-format-hex',
+      click: (): void => {
+        setCopyFormat('hex');
+      }
     },
     {
       label: translations.menus.copyAsRgb,
-      type: 'radio'
-      // TODO: Set copy as RGB, share value between setting menu and app menu
+      type: 'radio',
+      id: 'copy-format-rgb',
+      click: (): void => {
+        setCopyFormat('rgb');
+      }
     },
     {
       label: translations.menus.copyAccordingToInputMode,
-      type: 'radio'
-      // TODO: Set copy according to input mode, share value between setting menu and app menu
+      type: 'radio',
+      id: 'copy-format-input',
+      click: (): void => {
+        setCopyFormat('input');
+      }
     }
   ]
 };

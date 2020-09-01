@@ -1,8 +1,17 @@
 import { ipcRenderer } from 'electron';
 import { getUserPreferedTheme, getOsTheme } from '@utils/getThemes';
-import { getWindowPinStatus, getSelectedColor, getColorInputMode } from '@storage';
+import {
+  getWindowPinStatus,
+  getSelectedColor,
+  getColorInputMode,
+  getCopyFormat
+} from '@storage';
 import { AppTheme } from '@types';
 import { convertColorHexToRgbString } from '@utils/color';
+
+// nodeIntegration is set to `false` for security reasons
+// Inject functions needed for web contents here
+window.ipcRenderer = ipcRenderer;
 
 const setInitialAppTheme = async () => {
   const userPreference = await getUserPreferedTheme();
@@ -13,13 +22,10 @@ const setInitialAppTheme = async () => {
   window.document.documentElement.setAttribute('data-theme', themeToUse);
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-  setInitialAppTheme();
-});
-
-// nodeIntegration is set to `false` for security reasons
-// Inject functions needed for web contents here
-window.ipcRenderer = ipcRenderer;
+const restoreCopyFormat = async () => {
+  const { copyFormat } = await getCopyFormat();
+  window.document.getElementById('app')?.setAttribute('copyFormat', copyFormat ?? 'hex');
+};
 
 const restoreWindowPinStatus = async (): Promise<void> => {
   const { isPinned } = await getWindowPinStatus();
@@ -48,5 +54,9 @@ const restoreSelectedColorAndInputMode = async (): Promise<void> => {
   }
 };
 
-restoreWindowPinStatus();
-restoreSelectedColorAndInputMode();
+window.addEventListener('DOMContentLoaded', () => {
+  setInitialAppTheme();
+  restoreCopyFormat();
+  restoreWindowPinStatus();
+  restoreSelectedColorAndInputMode();
+});

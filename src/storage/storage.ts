@@ -7,7 +7,9 @@ import {
   PinStatusStorage,
   SelectedColorStorage,
   ColorInputModeStorage,
-  ColorInputMode
+  ColorInputMode,
+  CopyFormatStorage,
+  CopyFormat
 } from '@types';
 
 const WINDOW_POSITION_STORAGE_PATH = 'windowPosition';
@@ -15,6 +17,7 @@ const THEME_STORAGE_PATH = 'appTheme';
 const WINDOW_PIN_STATUS_STORAGE_PATH = 'windowPinStatus';
 const WINDOW_SELECTED_COLOR_STORAGE_PATH = 'selectedColor';
 const WINDOW_COLOR_INPUT_MODE_STORAGE_PATH = 'colorInputMode';
+const WINDOW_COPY_FORMAT_STORAGE_PATH = 'copyFormat';
 
 /**
  * Get user defined theme preference stored in storage
@@ -208,6 +211,46 @@ export const saveColorInputMode = (mode?: ColorInputMode): void => {
     });
   } catch (error) {
     log.error(error?.message ?? 'Unknown error from saveColorInputMode()');
+  }
+};
+
+/**
+ * Get copy format stored in storage
+ * @returns {CopyFormatStorage} JSON that contains user's last selected copy format
+ */
+export const getCopyFormat = async (): Promise<CopyFormatStorage> => {
+  try {
+    const copyFormat = await new Promise((resolve, reject) => {
+      storage.get(WINDOW_COPY_FORMAT_STORAGE_PATH, (
+        error: Error, data: CopyFormatStorage
+      ) => {
+        if (error) { reject(error); }
+        resolve(data);
+      });
+    });
+    return copyFormat as CopyFormatStorage;
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from getCopyFormat()');
+    return {};
+  }
+};
+
+/**
+ * Save selected copy format to storage
+ * @param {CopyFormat} user selected copy format
+ */
+export const saveCopyFormat = (format?: CopyFormat): void => {
+  try {
+    if (typeof format !== 'string') {
+      throw new Error('Format is not defined when trying to save copy format');
+    }
+
+    const copyFormat: CopyFormatStorage = { copyFormat: format };
+    storage.set(WINDOW_COPY_FORMAT_STORAGE_PATH, copyFormat, (error) => {
+      if (error) { throw error; }
+    });
+  } catch (error) {
+    log.error(error?.message ?? 'Unknown error from saveCopyFormat()');
   }
 };
 

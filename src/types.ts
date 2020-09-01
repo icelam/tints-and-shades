@@ -18,6 +18,12 @@ export type AppThemeStorage = {
   theme?: AppThemeOptions;
 }
 
+export type CopyFormat = 'hex' | 'rgb' | 'input';
+
+export type CopyFormatStorage = {
+  copyFormat?: CopyFormat;
+}
+
 export type ColorInputMode = 'hex' | 'rgb';
 
 export type ColorInputModeStorage = {
@@ -35,5 +41,6 @@ export type TintsOrShadesMode = 'tints' | 'shades';
 export type TintsOrShadesItem = {
     hex: string;
     rgb: RgbColor;
+    rgbString: string;
 };
 

@@ -103,7 +103,13 @@ export const generateTintsOrShades = (
     return [];
   }
 
-  const result: TintsOrShadesItem[] = [{ hex: color, rgb }];
+  const result: TintsOrShadesItem[] = [
+    {
+      hex: color,
+      rgb,
+      rgbString: `${rgb.red}, ${rgb.green}, ${rgb.blue}`
+    }
+  ];
 
   const calculateNewValue = mode === 'tints'
     ? calculateTints
@@ -119,7 +125,8 @@ export const generateTintsOrShades = (
 
     result.push({
       hex: nexStepHex,
-      rgb: nextStepRgb
+      rgb: nextStepRgb,
+      rgbString: `${nextStepRgb.red}, ${nextStepRgb.green}, ${nextStepRgb.blue}`
     });
   }
 

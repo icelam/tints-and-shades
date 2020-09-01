@@ -10,7 +10,8 @@ import {
   getWindowPinStatus,
   saveWindowPinStatus,
   saveSelectedColor,
-  saveColorInputMode
+  saveColorInputMode,
+  getCopyFormat
 } from '@storage';
 import { applicationMenu, settingMenu } from '@menus';
 import {
@@ -21,7 +22,9 @@ import {
   MAIN_WINDOW_WIDTH,
   MAIN_WINDOW_HEIGHT
 } from '@constants';
-import { Position, AppThemeOptions, ColorInputMode } from '@types';
+import {
+  Position, AppThemeOptions, ColorInputMode, CopyFormat
+} from '@types';
 
 let mainWindow: BrowserWindow;
 
@@ -109,6 +112,13 @@ const setInitialTheme = async () => {
 };
 setInitialTheme();
 listenToSystemThemeChange();
+
+const setInitialCopyFormat = async () => {
+  const { copyFormat } = await getCopyFormat();
+  const initialCopyFormat: CopyFormat = copyFormat ?? 'hex';
+  settingMenu.getMenuItemById(`copy-format-${initialCopyFormat}`).checked = true;
+};
+setInitialCopyFormat();
 
 // Event Handlers
 ipcMain.on('QUIT_APP', () => mainWindow?.close());

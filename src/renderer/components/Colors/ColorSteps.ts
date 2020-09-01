@@ -7,7 +7,7 @@ import copyIcon from '@images/icons/copy.svg';
 import commonButtonStyles from '@components/Button/button.styles';
 import commonTooltipStyles from '@components/Tooltip/tooltip.styles';
 import { generateTintsOrShades } from '@utils/color';
-import { TintsOrShadesMode } from '@types';
+import { TintsOrShadesMode, CopyFormat, ColorInputMode } from '@types';
 
 /**
  * Click to generate random color
@@ -74,7 +74,11 @@ class ColorSteps extends LitElement {
     ];
   }
 
-  @property({ type: String }) mode: TintsOrShadesMode = 'tints';
+  @property() copyFormat: CopyFormat = 'hex';
+
+  @property() colorInputMode: ColorInputMode = 'hex';
+
+  @property() mode: TintsOrShadesMode = 'tints';
 
   @property({ type: String }) selectedColor = '';
 
@@ -82,7 +86,8 @@ class ColorSteps extends LitElement {
 
   render(): TemplateResult {
     const colorSteps = generateTintsOrShades(this.selectedColor, this.mode);
-    // TODO: respect setting of copy format by changing button value
+    const parsedCopyformat = this.copyFormat === 'input' ? this.colorInputMode : this.copyFormat;
+    const copyDataKey = parsedCopyformat === 'rgb' ? 'rgbString' : 'hex';
     return html`
       ${colorSteps.map((color) => html`
         <div
@@ -95,7 +100,7 @@ class ColorSteps extends LitElement {
           <button
             class="button copy-button"
             @click=${this.copyColorToClipboard}
-            value="${color.hex}"
+            value="${color[copyDataKey]}"
           >
             ${svg`${unsafeHTML(copyIcon)}`}
           </button>
