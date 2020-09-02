@@ -20,6 +20,7 @@ class ColorPicker extends LitElement {
         height: 2.5rem;
         display: block;
         box-sizing: border-box;
+        cursor: pointer;
       }
 
       input[type="color"] {
