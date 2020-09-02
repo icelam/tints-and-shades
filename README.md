@@ -14,6 +14,14 @@
     <a href="https://github.com/icelam/tints-and-shades/releases"><img alt="Current version" src="https://img.shields.io/github/v/release/icelam/tints-and-shades.svg?sort=semver&label=latest&logo=github"/></a>
 </p>
 
+## Cool Features
+The main feature of this app is to generate tints and shades of a specific color. And it comes with other cool features like:
+
+![Pin Window - Keep the app window on top to be more efficient](./docs/explain-pin.png)
+![Input format - Input colors via color picker, HEX value and RGB value](./docs/explain-input-format.png)
+![Copy format - Copy generated colors as HEX code or RGB value](./docs/explain-copy-format.png)
+![Theme - Light mode, dark mode. Or let the system choose.](./docs/explain-theme.png)
+
 ## Download
 You can check the [latest release](https://github.com/icelam/tints-and-shades/releases/latest) of this app or download from the list below:
 
@@ -35,7 +43,7 @@ You can check the [latest release](https://github.com/icelam/tints-and-shades/re
 * [RPM file for i686](https://github.com/icelam/tints-and-shades/releases/download/v1.0.0/tints-and-shades-1.0.0.i686.rpm)
 * [RPM file for x68 (64-bit)](https://github.com/icelam/tints-and-shades/releases/download/v1.0.0/tints-and-shades-1.0.0.x86_64.rpm)
 
-## Setup ##
+## For Developers - Setup ##
 Below shows some basic setup steps.
 
 ### Node version ###
