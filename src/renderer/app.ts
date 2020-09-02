@@ -130,22 +130,30 @@ class GeneratorApp extends LitElement {
   }
 
   /**
-   * Handle change of colour through color picker
+   * Common color update code share between random color function and color picker chage
    */
-  private onColorPickerChange(event: Event): void {
-    const newColor = (event.target as HTMLInputElement).value;
-    this.selectedColor = newColor;
+
+  private setNewColor(color: string): void {
+    this.selectedColor = color;
 
     // Format input value according to input mode
     let inputValue = '';
     if (this.colorInputMode === 'rgb') {
-      inputValue = convertColorHexToRgbString(newColor);
+      inputValue = convertColorHexToRgbString(color);
     } else {
-      inputValue = removeHashFromHexColor(newColor);
+      inputValue = removeHashFromHexColor(color);
     }
     this.colorInputValue = inputValue;
 
-    window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
+    window.ipcRenderer.send('SAVE_SELECTED_COLOR', color);
+  }
+
+  /**
+   * Handle change of colour through color picker
+   */
+  private onColorPickerChange(event: Event): void {
+    const newColor = (event.target as HTMLInputElement).value;
+    this.setNewColor(newColor);
   }
 
   /**
@@ -153,9 +161,7 @@ class GeneratorApp extends LitElement {
    */
   private onRandomizeColor(): void {
     const newColor = randomHexColor() ?? this.selectedColor;
-    this.selectedColor = newColor;
-    // TODO: change input
-    window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
+    this.setNewColor(newColor);
   }
 
   /**
