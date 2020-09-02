@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.3](https://github.com/icelam/tints-and-shades/compare/v1.0.2...v1.0.3) (2020-09-02)
+
+
+### Bug Fixes
+
+* allow copy and paste in color input box ([8186b75](https://github.com/icelam/tints-and-shades/commit/8186b753e76505bea52ed89ee2e7799cdcbbb6c3))
+* app version should update on release ([334cddb](https://github.com/icelam/tints-and-shades/commit/334cddbc93c8cf5fc1745793d797464b46f1bfa4))
+
 ### [1.0.2](https://github.com/icelam/tints-and-shades/compare/v1.0.1...v1.0.2) (2020-09-02)
 
 
