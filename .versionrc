@@ -3,5 +3,7 @@
   "commitUrlFormat": "https://github.com/{{owner}}/{{repository}}/commit/{{hash}}",
   "issueUrlFormat": "https://github.com/{{owner}}/{{repository}}/issues/{{id}}",
   "header": "# Changelog\n",
-  "postbump": "yarn bump-version-constant"
+  "scripts": {
+    "postbump": "yarn bump-version-constant"
+  }
 }
