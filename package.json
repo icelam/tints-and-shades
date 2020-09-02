@@ -78,6 +78,7 @@
     "analyze:web": "wca analyze \"src/**/*.ts\" --outFile wca-report.json",
     "first-release": "npx standard-version --commit-all --tag-prefix v --release-as 1.0.0 --infile CHANGELOG.md",
     "release": "npx standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
+    "bump-readme-download-link": "node scripts/bumpReadmeDownloadLink.js && git add README.md",
     "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts",
     "abi:electron": "electron -a",
     "abi:node": "node -e \"console.log(process.versions.modules)\""

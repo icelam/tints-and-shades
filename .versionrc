@@ -4,6 +4,6 @@
   "issueUrlFormat": "https://github.com/{{owner}}/{{repository}}/issues/{{id}}",
   "header": "# Changelog\n",
   "scripts": {
-    "postbump": "yarn bump-version-constant"
+    "postbump": "yarn bump-version-constant && yarn bump-readme-download-link"
   }
 }
