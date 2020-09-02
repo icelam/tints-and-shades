@@ -4,6 +4,7 @@ import { IS_DEVELOPEMENT } from '@constants';
 
 import {
   appMenuItem,
+  editMenuItem,
   developerMenuItem
 } from './menuItems';
 
@@ -11,7 +12,8 @@ import {
  * Menu template for creating application menu displayed in macOS
  */
 const applicationMenuTemplate: MenuItemConstructorOptions[] = [
-  appMenuItem
+  appMenuItem,
+  editMenuItem
   // Temporary disable `copyFormatMenuItem` and `themeMenuItem`
   // Since importing `applicationMenu` and `settingMenu` at `setAppTheme()`
   // breaks functions of other menu items

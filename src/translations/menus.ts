@@ -1,4 +1,5 @@
 const menusTranslations = {
+  edit: 'Edit',
   copyFormat: 'Copy format',
   copyAsHex: 'Copy as HEX',
   copyAsRgb: 'Copy as RGB',

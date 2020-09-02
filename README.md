@@ -20,7 +20,8 @@ The main feature of this app is to generate tints and shades of a specific color
 ![Pin Window - Keep the app window on top to be more efficient](./docs/explain-pin.png)
 ![Input format - Input colors via color picker, HEX value and RGB value](./docs/explain-input-format.png)
 ![Copy format - Copy generated colors as HEX code or RGB value](./docs/explain-copy-format.png)
-![Theme - Light mode, dark mode. Or let the system choose.](./docs/explain-theme.png)
+![Random - Keep the app window on top to be more efficient](./docs/explain-random.png)
+![Theme - Light mode, dark mode. Or let the system choose](./docs/explain-theme.png)
 
 ## Download
 You can check the [latest release](https://github.com/icelam/tints-and-shades/releases/latest) of this app or download from the list below:

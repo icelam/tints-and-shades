@@ -11,6 +11,21 @@ import {
 } from '@utils';
 
 /**
+ * Menu item for editing text fields
+ */
+export const editMenuItem: MenuItemConstructorOptions = {
+  label: translations.menus.edit,
+  submenu: [
+    { role: 'undo' },
+    { role: 'redo' },
+    { role: 'cut' },
+    { role: 'copy' },
+    { role: 'paste' },
+    { role: 'selectAll' }
+  ]
+};
+
+/**
  * Menu item for setting copy format
  */
 export const copyFormatMenuItem: MenuItemConstructorOptions = {
