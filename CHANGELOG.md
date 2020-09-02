@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://github.com/icelam/tints-and-shades/compare/v1.0.0...v1.0.1) (2020-09-02)
+
+
+### Bug Fixes
+
+* add pointer cursor to color picker ([152b0be](https://github.com/icelam/tints-and-shades/commit/152b0be30db88bdb93ff45f81870fe2e28fb0a4f))
+
 ## 1.0.0 (2020-09-01)
 
 
