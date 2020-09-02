@@ -143,8 +143,8 @@ class GeneratorApp extends LitElement {
     } else {
       inputValue = removeHashFromHexColor(newColor);
     }
-
     this.colorInputValue = inputValue;
+
     window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
   }
 
@@ -154,6 +154,7 @@ class GeneratorApp extends LitElement {
   private onRandomizeColor(): void {
     const newColor = randomHexColor() ?? this.selectedColor;
     this.selectedColor = newColor;
+    // TODO: change input
     window.ipcRenderer.send('SAVE_SELECTED_COLOR', newColor);
   }
 
@@ -181,9 +182,12 @@ class GeneratorApp extends LitElement {
     this.colorInputValue = value;
 
     if (!inputHasError) {
-      this.selectedColor = isCurrentlyInHexMode
+      const newHexColorValue = isCurrentlyInHexMode
         ? `#${value}`
         : convertColorRgbToHex(value) as string;
+      this.selectedColor = newHexColorValue;
+
+      window.ipcRenderer.send('SAVE_SELECTED_COLOR', newHexColorValue);
     }
   }
 
