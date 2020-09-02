@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://github.com/icelam/tints-and-shades/compare/v1.0.1...v1.0.2) (2020-09-02)
+
+
+### Bug Fixes
+
+* change value of color input box when generating random color ([2fb5da1](https://github.com/icelam/tints-and-shades/commit/2fb5da1a835e12d4e81d12510c18b218d43f497a))
+* save color on input change ([3d23c5b](https://github.com/icelam/tints-and-shades/commit/3d23c5bd88908da6477b2a7f283b1ea4b589d1ab))
+
 ### [1.0.1](https://github.com/icelam/tints-and-shades/compare/v1.0.0...v1.0.1) (2020-09-02)
 
 
