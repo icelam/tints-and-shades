@@ -80,6 +80,7 @@
     "release": "npx standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
     "bump-readme-download-link": "node scripts/bumpReadmeDownloadLink.js && git add README.md",
     "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts",
+    "extract-latest-change-log": "node scripts/extractLatestChangeLog.js",
     "abi:electron": "electron -a",
     "abi:node": "node -e \"console.log(process.versions.modules)\""
   },

@@ -7,7 +7,9 @@ on:
 jobs:
   release:
     name: Create release
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    # container: electronuserland/builder:wine-mono
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
@@ -37,18 +39,14 @@ jobs:
       #     yarn install --frozen-lockfile
       # - name: Build Tints and Shades packages
       #   run: |
-      #     ELECTRON_BUILDER_CACHE=~/.electron-builder-cache yarn package
+      #     ELECTRON_BUILDER_CACHE=$(pwd)/.cache/electron-builder WINEPREFIX=$(pwd)/.cache/.wine yarn package
 
       # ----------------------------------------#
       #                 Release                 #
       # ----------------------------------------#
-      # - name: Install rexreplace
-      #   run: |
-      #     yarn global add rexreplace
-      # - name: Generate release body
-      #   # https://github.com/conventional-changelog/standard-version/issues/568#issuecomment-611202153
-      #   run: |
-      #     rexreplace "^.*?#+\s\[.*?\n.*?(?=\s*#+\s\[)" "_" -s -M -G -m -o "CHANGELOG.md" > RELEASE_BODY.md
+      - name: Generate release body
+        run: |
+          yarn extract-latest-change-log
       - name: Create release
         id: create-release
         uses: actions/create-release@v1
@@ -59,7 +57,7 @@ jobs:
           release_name: ${{ github.ref }}
           draft: false
           prerelease: false
-          # body_path: RELEASE_BODY.md
+          body_path: RELEASE_BODY.md
 
       # ----------------------------------------#
       #                 Uploads                 #
