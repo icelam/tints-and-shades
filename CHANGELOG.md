@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/icelam/tints-and-shades/compare/v1.0.3...v1.1.0) (2020-11-29)
+
+
+### Features
+
+* highlight copy button on click ([fc94f6b](https://github.com/icelam/tints-and-shades/commit/fc94f6b01b997e5a892b4b1da42a44f4645088e9))
+* remove hash when copying hex color ([7e102f3](https://github.com/icelam/tints-and-shades/commit/7e102f3d397b59a67682d1f9febc22a9f1c365b6))
+
 ### [1.0.3](https://github.com/icelam/tints-and-shades/compare/v1.0.2...v1.0.3) (2020-09-02)
 
 
