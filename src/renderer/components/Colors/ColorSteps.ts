@@ -100,7 +100,7 @@ class ColorSteps extends LitElement {
           <button
             class="button copy-button"
             @click=${this.copyColorToClipboard}
-            value="${color[copyDataKey]}"
+            value="${removeHashFromHexColor(color[copyDataKey])}"
           >
             ${svg`${unsafeHTML(copyIcon)}`}
           </button>
