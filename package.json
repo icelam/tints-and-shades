@@ -1,6 +1,6 @@
 {
   "name": "tints-and-shades",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "Ice Lam <6780420+icelam@users.noreply.github.com>",
   "homepage": "./",
@@ -80,6 +80,7 @@
     "release": "npx standard-version --commit-all --tag-prefix v --infile CHANGELOG.md",
     "bump-readme-download-link": "node scripts/bumpReadmeDownloadLink.js && git add README.md",
     "bump-version-constant": "node scripts/bumpVersionConstant.js && git add src/constants.ts",
+    "extract-latest-change-log": "node scripts/extractLatestChangeLog.js",
     "abi:electron": "electron -a",
     "abi:node": "node -e \"console.log(process.versions.modules)\""
   },

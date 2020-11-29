@@ -29,22 +29,22 @@ The main feature of this app is to generate tints and shades of a specific color
 You can check the [latest release](https://github.com/icelam/tints-and-shades/releases/latest) of this app or download from the list below:
 
 ### Windows
-* [Portable Executable](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades.1.0.3.exe)
-* [EXE setup file](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades.Setup.1.0.2.exe) ([Blockmap](https://github.com/icelam/tints-and-shades/releases/download/v1.0.2/Tints.and.Shades.Setup.1.0.3.exe.blockmap))
-* [32-bit MSI installation file](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades.1.0.3.ia32.msi)
-* [64-bit MSI installation file](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades.1.0.3.msi)
+* [Portable Executable](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades.1.1.0.exe)
+* [EXE setup file](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades.Setup.1.0.2.exe) ([Blockmap](https://github.com/icelam/tints-and-shades/releases/download/v1.0.2/Tints.and.Shades.Setup.1.1.0.exe.blockmap))
+* [32-bit MSI installation file](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades.1.1.0.ia32.msi)
+* [64-bit MSI installation file](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades.1.1.0.msi)
 
 ### macOS
-* [DMG file](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades-1.0.2.dmg) ([Blockmap](https://github.com/icelam/tints-and-shades/releases/download/v1.0.2/Tints.and.Shades-1.0.3.dmg.blockmap))
-* [Zip file](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades-1.0.3-mac.zip)
+* [DMG file](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades-1.0.2.dmg) ([Blockmap](https://github.com/icelam/tints-and-shades/releases/download/v1.0.2/Tints.and.Shades-1.1.0.dmg.blockmap))
+* [Zip file](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades-1.1.0-mac.zip)
 
 ### Linux
-* [App image](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades-1.0.3.AppImage)
-* [App image for i386](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/Tints.and.Shades-1.0.3-i386.AppImage)
-* [DEB file for amd64](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/tints-and-shades_1.0.3_amd64.deb)
-* [DEB file for i386](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/tints-and-shades_1.0.3_i386.deb)
-* [RPM file for i686](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/tints-and-shades-1.0.3.i686.rpm)
-* [RPM file for x68 (64-bit)](https://github.com/icelam/tints-and-shades/releases/download/v1.0.3/tints-and-shades-1.0.3.x86_64.rpm)
+* [App image](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades-1.1.0.AppImage)
+* [App image for i386](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/Tints.and.Shades-1.1.0-i386.AppImage)
+* [DEB file for amd64](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/tints-and-shades_1.1.0_amd64.deb)
+* [DEB file for i386](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/tints-and-shades_1.1.0_i386.deb)
+* [RPM file for i686](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/tints-and-shades-1.1.0.i686.rpm)
+* [RPM file for x68 (64-bit)](https://github.com/icelam/tints-and-shades/releases/download/v1.1.0/tints-and-shades-1.1.0.x86_64.rpm)
 
 ## For Developers - Setup ##
 Below shows some basic setup steps.
