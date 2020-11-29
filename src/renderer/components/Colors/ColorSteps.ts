@@ -61,14 +61,19 @@ class ColorSteps extends LitElement {
         transition: opacity 0.1s linear;
       }
 
+      .color-steps__step:hover .copy-button {
+        opacity: 1;
+      }
+
       .color-steps__step .copy-button > svg {
         fill: var(--color-copy-button-text);
         height: 0.75rem;
         width: auto;
+        transition: opacity 0.1s linear;
       }
 
-      .color-steps__step:hover .copy-button {
-        opacity: 1;
+      .color-steps__step:hover .copy-button:active > svg {
+        fill: var(--color-copy-button-text-active);
       }
     `
     ];
