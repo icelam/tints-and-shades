@@ -15,7 +15,7 @@ export const IS_LINUX = [
 
 export const IS_DEVELOPEMENT = process.env.NODE_ENV === 'development';
 
-export const APP_VERSION = 'v1.0.3';
+export const APP_VERSION = 'v1.1.0';
 
 const { versions } = process;
 export const ELECTRON_VERSION = versions.electron;
